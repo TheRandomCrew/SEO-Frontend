@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import HomeView from '../Home/HomeView';
 import Search from '../Home/Search';
-import Resume from '../Home/Resume';
-import Export from '../Home/Export';
+// import Resume from '../Home/Resume';
+// import Export from '../Home/Export';
 import SERPTable from '../Home/Table/SERPTable';
 import RankTable from '../Home/Table/RankTable';
+import EditorView from '../Home/Editor';
+import Analysis from '../Home/Analysis';
 
 export default class Home extends Component {
     constructor(props) {
@@ -14,31 +16,34 @@ export default class Home extends Component {
     }
 
     render() {
-        const { query, filter, serpData, ip, stats } = this.state
+        const { query, filter, ip, expand } = this.state
         const { filterKeys, eraseKeys } = filter
         return (
             <HomeView
+                toggle={this.toggle}
+                expand={expand}
                 searchForm={
                     <Search
                         set={this.set}
                         filterKeys={filterKeys}
                         eraseKeys={eraseKeys}
                         ip={ip}
-                    >
-                    </Search>
-                }
-                exportArea={
-                    <Export
-                        stats={stats}
-                        set={this.set}
-                        serpData={serpData}
                     />
                 }
-                overview={<Resume
-                    query={query}
-                    set={this.set}
-                />
-                }
+                EditorView={<EditorView/>}
+                Analysis={<Analysis/>}
+                // exportArea={
+                //     <Export
+                //         stats={stats}
+                //         set={this.set}
+                //         serpData={serpData}
+                //     />
+                // }
+                // overview={<Resume
+                //     query={query}
+                //     set={this.set}
+                // />
+                // }
                 isSearching={
                     query.keywords !== '' ? true : false
                 }
@@ -72,7 +77,7 @@ export default class Home extends Component {
         })
             .then((res) => {
                 console.log(res.data)
-                
+
 
             })
             .catch((err) => {
@@ -95,6 +100,10 @@ export default class Home extends Component {
     set = (key, value) => {
         this.setState({ [key]: value });
     };
+
+    toggle = (key) => {
+        this.setState({ [key]: !this.state[key] })
+    }
 }
 
 const defaultState = {
@@ -118,4 +127,5 @@ const defaultState = {
     ],
     copied: false,
     ip: '0.0.0.1',
+    expand: false
 }

@@ -121,11 +121,11 @@ export default class SERPTable extends Component {
     let rank = {
       rows: rankRow,
       columns: [
-        { name: 'pos', title: 'Ranking' },
+        { name: 'pos', title: 'Rank ing' },
         { name: 'title', title: 'Titulo' },
-        { name: 'shares', title: 'Facebook' },
-        { name: 'url', title: 'URL' },
-        { name: 'pda', title: 'PDA' }
+        { name: 'shares', title: 'FB' },
+        { name: 'pda', title: 'PDA' },
+        { name: 'url', title: 'URL' }
       ]
     }
     return rank

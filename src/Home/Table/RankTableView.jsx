@@ -3,8 +3,8 @@ import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DataTypeProvider } from '@devexpress/dx-react-grid';
 import {
-  SelectionState,
-  IntegratedSelection,
+  // SelectionState,
+  // IntegratedSelection,
   SortingState,
   IntegratedSorting
 } from '@devexpress/dx-react-grid';
@@ -13,7 +13,7 @@ import {
   Table,
   // VirtualTable,
   TableHeaderRow,
-  TableSelection,
+  // TableSelection,
 } from '@devexpress/dx-react-grid-bootstrap4';
 
 class TableView extends React.Component {
@@ -23,16 +23,12 @@ class TableView extends React.Component {
     this.changeSelection = selection => this.setState({ selection });
   }
   render() {
-    const { columnWidths, urlColumn, faceColumn, pdaColumn, selection } = this.state;
+    const { columnWidths, urlColumn, faceColumn, pdaColumn } = this.state;
     const { tableData, results_time } = this.props
     const { rows, columns } = tableData
     return (
       <div>
         <span>
-          <b>Filas seleccionadas:</b>
-          {' '}
-          {selection.length} /
-          {' '}
           <b>Tiempo:</b>
           {' '}
           {results_time}
@@ -55,14 +51,14 @@ class TableView extends React.Component {
             for={pdaColumn}
           />
           <Table columnExtensions={columnWidths} />
-          <SelectionState
+          {/* <SelectionState
             selection={selection}
             onSelectionChange={this.changeSelection}
           />
-          <IntegratedSelection />
+          <IntegratedSelection /> */}
           {/* <VirtualTable /> */}
           <TableHeaderRow showSortingControls contentComponent={TableHeaderContent} />
-          <TableSelection showSelectAll />
+          {/* <TableSelection showSelectAll /> */}
         </Grid>
       </div>
     );
@@ -77,7 +73,7 @@ const TableHeaderContent = ({ column, children, ...restProps }) => (
     {...restProps}
   >
     {children}
-    <FontAwesomeIcon icon="arrows-alt-v" />
+    {/* <FontAwesomeIcon icon="arrows-alt-v" /> */}
   </TableHeaderRow.Content>
 );
 
@@ -124,9 +120,9 @@ const defaultState = {
   columnWidths: [
     { columnName: 'pos', width: 20, wordWrapEnabled: true },
     { columnName: 'title', wordWrapEnabled: true },
-    { columnName: 'shares', width: 30, wordWrapEnabled: true },
+    { columnName: 'shares', width: 20, wordWrapEnabled: true },
     { columnName: 'url', width: 30, wordWrapEnabled: true },
-    { columnName: 'pda', width: 50, wordWrapEnabled: true }
+    { columnName: 'pda', width: 20, wordWrapEnabled: true }
   ],
   selection: []
 }
@@ -146,12 +142,10 @@ class Facebook extends React.Component {
   }
 
   render() {
-    const { reaction_count, comment_count, share_count, comment_plugin_count } = this.state.engagement
+    const { share_count } = this.state.engagement
     return (
       <p>
-        <FontAwesomeIcon icon="heart" />{reaction_count} /
-        <FontAwesomeIcon icon="share-alt" />{share_count} /
-        <FontAwesomeIcon icon="comment" />{comment_count + comment_plugin_count}
+        <FontAwesomeIcon icon="share-alt" />{share_count} 
       </p>
     )
   }
@@ -203,6 +197,7 @@ class PDA extends React.Component {
     })
       .then((res) => {
         const { data } = res.data
+        console.log(res.data)
         const { pda } = data
         if (pda) {
           this.setState({ pda })

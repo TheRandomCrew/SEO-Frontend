@@ -209,9 +209,9 @@ const defaultStatus = {
     ],
     columns: [
       { name: 'keywords', title: 'Palabras Claves' },
-      { name: 'volume', title: 'Vo lu men' },
+      { name: 'volume', title: 'Bus que da' },
       { name: 'cpc', title: 'CPC' },
-      { name: 'competencia', title: 'Com pe ten cia' }
+      { name: 'competencia', title: 'Com pe ten cia SEO' }
     ]
   }
 }

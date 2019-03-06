@@ -17,10 +17,10 @@ export default class SearchForm extends Component {
             open, selected, keywords, minVolume, maxVolume, minAdwords, maxAdwords, minCPC, maxCPC, filterKeys, eraseKeys
         } = this.props
         return (
-            <Form 
-            noValidate 
-            validated={validated}
-            onSubmit={this.props.handleSubmit}
+            <Form
+                noValidate
+                validated={validated}
+                onSubmit={this.props.handleSubmit}
             >
                 <Form.Row>
                     <Form.Group as={Col} md="6" controlId="validationKeyword">
@@ -33,7 +33,7 @@ export default class SearchForm extends Component {
                             <Form.Control
                                 required
                                 type="text"
-                                placeholder="Enter a keyword"
+                                placeholder="Palabra Clave"
                                 defaultValue=""
                                 onChange={(e) => this.props.handleChange(e, "keywords")}
                             />
@@ -54,16 +54,16 @@ export default class SearchForm extends Component {
                         <Button type="submit" variant="success" disabled={keywords ? false : true}>
                             Buscar
                         </Button>
-                        <Button
-                            variant="success"
-                            onClick={() => this.props.set('open', !open)}
-                        >
-                            Filtrar
-                        </Button>
                     </Form.Group>
+                    <Button
+                        variant="success"
+                        onClick={() => this.props.set('open', !open)}
+                    >
+                        Filtrar
+                        </Button>
                 </Form.Row>
                 <Collapse in={open}>
-                     <Container>
+                    <Container>
                         <hr />
                         <Form.Row>
                             <Form.Group as={Col} md="12" className="align-middle">
@@ -74,7 +74,7 @@ export default class SearchForm extends Component {
                                         type="number"
                                         placeholder="MIN"
                                         id="minVolume"
-                                        value={minVolume===0?'':minVolume}
+                                        value={minVolume === 0 ? '' : minVolume}
                                         onChange={(e) => this.props.handleChange(e, "minVolume")}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -86,7 +86,7 @@ export default class SearchForm extends Component {
                                         type="number"
                                         placeholder="MAX"
                                         id="maxVolume"
-                                        value={maxVolume===1000000?'':maxVolume}
+                                        value={maxVolume === 1000000 ? '' : maxVolume}
                                         onChange={(e) => this.props.handleChange(e, "maxVolume")}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -104,7 +104,7 @@ export default class SearchForm extends Component {
                                         type="number"
                                         placeholder="MIN"
                                         id="minAdwords"
-                                        value={minAdwords===0?'':minAdwords}
+                                        value={minAdwords === 0 ? '' : minAdwords}
                                         onChange={(e) => this.props.handleChange(e, "minAdwords")}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -116,7 +116,7 @@ export default class SearchForm extends Component {
                                         type="number"
                                         placeholder="MAX"
                                         id="maxAdwords"
-                                        value={maxAdwords===100?'':maxAdwords}
+                                        value={maxAdwords === 100 ? '' : maxAdwords}
                                         onChange={(e) => this.props.handleChange(e, "maxAdwords")}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -134,7 +134,7 @@ export default class SearchForm extends Component {
                                         type="number"
                                         placeholder="MIN"
                                         id="minCPC"
-                                        value={minCPC===0?'':minCPC}
+                                        value={minCPC === 0 ? '' : minCPC}
                                         onChange={(e) => this.props.handleChange(e, "minCPC")}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -146,7 +146,7 @@ export default class SearchForm extends Component {
                                         type="number"
                                         placeholder="MAX"
                                         id="maxCPC"
-                                        value={maxCPC===10000?'':maxCPC}
+                                        value={maxCPC === 10000 ? '' : maxCPC}
                                         onChange={(e) => this.props.handleChange(e, "maxCPC")}
                                     />
                                     <Form.Control.Feedback type="invalid">
@@ -191,7 +191,7 @@ export default class SearchForm extends Component {
                                 Aplicar
                             </Button>
                         </Row>
-                        <hr/>
+                        <hr />
                     </Container>
                 </Collapse>
             </Form>

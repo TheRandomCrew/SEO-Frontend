@@ -1,56 +1,58 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col, Button, Card } from 'react-bootstrap';
 
-const HomeView = ({ searchForm, exportArea, overview, serpTable, rankTable, isSearching }) => {
+const HomeView = ({
+    searchForm,
+    serpTable,
+    rankTable,
+    EditorView,
+    Analysis,
+    isSearching,
+    toggle,
+    expand
+}) => {
     return (
-        <React.Fragment><Container>
+        <div style={{ marginTop: '45px', padding: 20 }}>
             <Row className="justify-content-md-center">
-                <Col xs='12' sm='12' lg="10">
-                    <h1 className="display-4" style={{ marginTop: '45px' }}>KeyWord Tool</h1>
-                    <p className="lead">
-                        Es la Mejor Alternativa para el Planificador de Palabras Claves de
-                        Googgle y Otras Herramientas de Palabra Claves
-            </p>
-                </Col>
+                <Button onClick={() => toggle('expand')} size="sm">
+                    Expandir editor de textos
+                    </Button>
             </Row>
-            <Row className="justify-content-md-center">
-                <Col xs='12' sm='12' lg="10">
-                    {searchForm}
-                </Col>
-            </Row>
-            {isSearching ?
-                <React.Fragment>
-                    {/* <Row className="justify-content-md-center">
-                        <Col xs='12' sm='12' lg="10">
-                            {exportArea}
-                        </Col>
-                    </Row> */}
-                    <Row className="justify-content-md-center">
-                        <Col xs='12' sm='12' lg="10">
-                            {overview}
-                        </Col>
+            <Row>
+                <Col hidden={expand} lg="4">
+                    <Row>
+                        <Card>
+                            {searchForm}
+                        </Card>
                     </Row>
-                </React.Fragment> :
-                <Container>
-                    <h3>
-                        Escribe en la caja de busqueda para mostrar resultados
-                    </h3>
-                </Container>
-            }
-        </Container>
-            <hr />
-            {isSearching ?
-                <Row noGutters>
-                    <Col xs='16' sm='16' md='6'>
-                        {exportArea}
-                        {serpTable}
-                    </Col>
-                    <Col xs='16' sm='16' md='6'>
-                        {rankTable}
-                    </Col>
-                </Row> : null
-            }
-        </React.Fragment>
+                    {isSearching ?
+                        <Row style={{ height: "100vh" }}>
+                            <Col className="h-50 d-inline-block" style={{ overflowY: "scroll" }} lg="12">
+                                <Card>
+                                    {serpTable}
+                                </Card>
+                            </Col>
+                            <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
+                            <Col className="h-50 d-inline-block" style={{ overflowY: "scroll" }} lg="12">
+                                <Card>
+                                    {rankTable}
+                                </Card>
+                            </Col>
+                        </Row> : null
+                    }
+                </Col>
+                <Col>
+                    <Card>
+                        {EditorView}
+                    </Card>
+                    <Card>
+                        <Row>
+                            {Analysis}
+                        </Row>
+                    </Card>
+                </Col>
+            </Row>
+        </div>
     )
 }
 
