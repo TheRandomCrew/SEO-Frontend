@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { DragDropContext } from 'react-beautiful-dnd';
+import DNDLayoutView from './DNDLayoutView';
 import EditorView from '../Editor';
-import Analysis from '../Analysis';
 
 //this is just an array of items to start out using
 //you don't have to declare it here, you could declare it down in state if you wanted
@@ -168,228 +167,53 @@ class DND extends Component {
                 isArticleTitleArray: false
             })
         }
-        else{
+        else {
             this.setState({ [key]: value })
         }
     }
     // Normally you would want to split things out into separate components.
     // But in this example everything is just done in one place for simplicity
     render() {
-        const { yourName, recipientName, items, lowerItems, hidden, html2plaintext,isArticleTitleArray, articleKeywords } = this.state
+        const {
+            yourName,
+            recipientName,
+            items,
+            lowerItems,
+            hidden,
+            html2plaintext,
+            isArticleTitleArray,
+            articleKeywords } = this.state
         let toggleMessage = this.toggleMessage
         let onChangeState = this.onChangeState
+        const { searchForm,
+            serpTable,
+            rankTable,
+            Analysis,
+            isSearching,
+            toggle,
+            expand } = this.props
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <Container style={{ marginTop: '45px', padding: 20 }}>
-                    <Row>
-                        <Col lg="4">
-                            <Row>
-                                <Card>
-                                    <h6>Tu nombre</h6>
-                                    <input
-                                        value={yourName}
-                                        onChange={(event) => this.onChangeState("yourName", event.target.value)} />
-                                    <br />
-                                    <h6>Tu Ubicacion</h6>
-                                    <input
-                                        value={recipientName}
-                                        onChange={(event) => this.onChangeState("recipientName", event.target.value)} />
-                                </Card>
-                            </Row>
-                            <Droppable droppableId="droppable1">
-                                {(provided, snapshot) => (
-                                    <div style={{ backgroundColor: snapshot.isDraggingOver && 'green' }}>
-                                        <div
-                                            ref={provided.innerRef}
-                                        >
-                                            {items.map((item, index) => (
-                                                <Draggable key={item.id} draggableId={item.id} index={index}>
-                                                    {(provided, snapshot) => (
-                                                        <div>
-                                                            <div
-                                                                ref={provided.innerRef}
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-
-                                                            >
-                                                                <span size='large'
-                                                                    style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
-                                                                >{item.content}
-                                                                </span>
-                                                            </div>
-                                                            {provided.placeholder}
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            ))}
-                                            {provided.placeholder}
-                                        </div>
-                                    </div>
-                                )}
-                            </Droppable>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Droppable droppableId="droppable2" direction='horizontal'>
-                                    {(provided, snapshot) => (
-                                        <div style={{ backgroundColor: snapshot.isDraggingOver && 'green' }}>
-                                            <div
-                                                ref={provided.innerRef}
-                                            >  {lowerItems.length > 0 ? 'Palabras Claves incluidas:' : 'Arrastra aca las palabras claves de la tabla'}
-                                                {lowerItems.map((item, index) => (
-                                                    <Draggable key={item.id} draggableId={item.id} index={index}>
-                                                        {(provided, snapshot) => (
-                                                            <div>
-                                                                <div
-                                                                    ref={provided.innerRef}
-                                                                    {...provided.draggableProps}
-                                                                    {...provided.dragHandleProps}
-
-                                                                >
-                                                                    <span size='large'
-                                                                        style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
-                                                                    >{item.content}
-                                                                    </span>
-                                                                </div>
-                                                                {provided.placeholder}
-                                                            </div>
-                                                        )}
-                                                    </Draggable>
-                                                ))}
-                                                {provided.placeholder}
-                                            </div>
-                                            <input
-                                                placeholder="Escribe el Titulo SEO"
-                                                onChange={e => onChangeState("articleKeywords", e.target.value, "titleInput")}
-                                                value={isArticleTitleArray?JSON.stringify(lowerItems.map(i => i.content)):articleKeywords}
-                                            />
-                                            <br />
-                                        </div>
-                                    )}
-                                </Droppable>
-                                <EditorView set={onChangeState} />
-                            </Card>
-                            <Card>
-                                <Row>
-                                    <Button onClick={() => toggleMessage()}> {hidden ? 'Show' : 'Hide'} custom message</Button>
-                                    <span hidden={hidden}>
-                                        {(lowerItems.length > 0)
-                                            ? <div> Resultado es: <br /> {lowerItems.map(i => i.words
-                                                ? <div> {i.words.replace("<<recipientName>>", recipientName)} <br /> </div>
-                                                : <div> {i.content + ','} <br /> </div>)}
-                                                <br />
-                                                {yourName && <div>- {yourName} </div>}
-                                                {html2plaintext && <div>- {html2plaintext} </div>}
-                                            </div>
-                                            : <div> Nada aqui</div>
-                                        }
-                                    </span>
-                                    <Analysis />
-                                </Row>
-                            </Card>
-                        </Col>
-                    </Row>
-
-                    {/* <br />
-                    <h2>Make a custom message using text inputs & drag and drop items!</h2>
-                    <br />
-                    <div>
-                        Give us some information about the message: <br />
-                        <h6>Tu nombre</h6>
-                        <input
-                            value={yourName}
-                            onChange={(event) => this.onChangeState("yourName", event.target.value)} />
-                        <br />
-                        <h6>Su nombre</h6>
-                        <input
-                            value={recipientName}
-                            onChange={(event) => this.onChangeState("recipientName", event.target.value)} />
-                        <br />
-                    </div>
-                    <br />
-                    <Droppable droppableId="droppable1">
-                        {(provided, snapshot) => (
-                            <div style={{ backgroundColor: snapshot.isDraggingOver && 'green' }}>
-                                <div
-                                    ref={provided.innerRef}
-                                > These items can be added to your message below. Drag them around! <br />
-                                    Red items are a single word. <br />
-                                    Orange items have more content. <br />
-                                    {this.state.items.map((item, index) => (
-                                        <Draggable key={item.id} draggableId={item.id} index={index}>
-                                            {(provided, snapshot) => (
-                                                <div>
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-
-                                                    >
-                                                        <span size='large'
-                                                            style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
-                                                        >{item.content}
-                                                        </span>
-                                                    </div>
-                                                    {provided.placeholder}
-                                                </div>
-                                            )}
-                                        </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                </div>
-                            </div>
-                        )}
-                    </Droppable>
-                    <br />
-                    <Droppable droppableId="droppable2" direction='horizontal'>
-                        {(provided, snapshot) => (
-                            <div style={{ backgroundColor: snapshot.isDraggingOver && 'green' }}>
-                                <div
-                                    ref={provided.innerRef}
-                                >  {this.state.lowerItems.length > 0 ? 'These items are in your message' : 'Drop items here to write your custom message!'}
-                                    {this.state.lowerItems.map((item, index) => (
-                                        <Draggable key={item.id} draggableId={item.id} index={index}>
-                                            {(provided, snapshot) => (
-                                                <div>
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-
-                                                    >
-                                                        <span size='large'
-                                                            style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
-                                                        >{item.content}
-                                                        </span>
-                                                    </div>
-                                                    {provided.placeholder}
-                                                </div>
-                                            )}
-                                        </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                </div>
-                            </div>
-                        )}
-                    </Droppable> */}
-                    {/* <br />
-                    <br />
-                    <Button onClick={() => this.toggleMessage()}> {this.state.hidden ? 'Show' : 'Hide'} custom message</Button>
-                    <span hidden={this.state.hidden}>
-                        {(this.state.lowerItems.length > 0)
-                            ? <div> Message is: <br /> {this.state.lowerItems.map(i => i.words
-                                ? <div> {i.words.replace("<<recipientName>>", recipientName)} <br /> </div>
-                                : <div> {i.content + ','} <br /> </div>)}
-                                <br />
-                                {this.state.yourName && <div>- {this.state.yourName} </div>}
-                            </div>
-                            : <div> I got nothin to say! </div>
-                        }
-                    </span>
-                    <br />
-                    <br />
-                    <span>Enjoy your message!</span> */}
-                </Container>
+                <DNDLayoutView
+                    yourName={yourName}
+                    recipientName={recipientName}
+                    items={items}
+                    lowerItems={lowerItems}
+                    hidden={hidden}
+                    html2plaintext={html2plaintext}
+                    isArticleTitleArray={isArticleTitleArray}
+                    articleKeywords={articleKeywords}
+                    toggleMessage={toggleMessage}
+                    onChangeState={onChangeState}
+                    searchForm={searchForm}
+                    serpTable={serpTable}
+                    rankTable={rankTable}
+                    EditorView={<EditorView set={onChangeState} />}
+                    Analysis={Analysis}
+                    isSearching={isSearching}
+                    toggle={toggle}
+                    expand={expand}
+                />
             </DragDropContext>
         );
     }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import HomeView from '../Home/HomeView';
+// import HomeView from '../Home/HomeView';
 import Search from '../Home/Search';
 // import Resume from '../Home/Resume';
 // import Export from '../Home/Export';
 import SERPTable from '../Home/Table/SERPTable';
 import RankTable from '../Home/Table/RankTable';
-import EditorView from '../Home/Editor';
 import Analysis from '../Home/Analysis';
+import DND from '../Home/DND/DND';
 
 export default class Home extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Home extends Component {
         const { query, filter, ip, expand } = this.state
         const { filterKeys, eraseKeys } = filter
         return (
-            <HomeView
+            <DND
                 toggle={this.toggle}
                 expand={expand}
                 searchForm={
@@ -30,8 +30,7 @@ export default class Home extends Component {
                         ip={ip}
                     />
                 }
-                EditorView={<EditorView/>}
-                Analysis={<Analysis/>}
+                Analysis={<Analysis />}
                 // exportArea={
                 //     <Export
                 //         stats={stats}
@@ -58,6 +57,9 @@ export default class Home extends Component {
                 />
                 }
             />
+            // <HomeView
+
+            // />
         )
     }
 

@@ -6,7 +6,6 @@ import Home from './Containers/Home.jsx';
 import Features from './Containers/Features';
 import Pricing from './Containers/Pricing';
 import Docs from './Docs/Docs';
-import DND from './Home/DND/DND';
 // import Login from './Containers/Login';
 // import SingIn from './User/SingIn';
 
@@ -21,7 +20,6 @@ const AppRouter = () => {
             <Route component={Pricing} path='/pricing' />
             {/* <Route component={Login} path='/login' /> */}
             {/* <Route component={SingIn} path='/singin' /> */}
-            <Route component={DND} path='/dnd' />
             <Route component={Features} path='/features' />
             <Route component={Docs} path='/documentation' />
           </Switch>
