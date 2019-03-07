@@ -16,12 +16,13 @@ export default class Home extends Component {
     }
 
     render() {
-        const { query, filter, ip, expand } = this.state
+        const { query, filter, ip, expand, serpData } = this.state
         const { filterKeys, eraseKeys } = filter
         return (
             <DND
                 toggle={this.toggle}
                 expand={expand}
+                serpData={serpData}
                 searchForm={
                     <Search
                         set={this.set}
@@ -125,7 +126,7 @@ const defaultState = {
     },
     stats: { total_count: '', results_time: '-' },
     serpData: [
-        { key: '-', volume: 0, cpc: 0, competencia: 0 }
+        { key: '-', volume: 0, cpc: 0, competencia: 0, id: 0 , content: "|" }
     ],
     copied: false,
     ip: '0.0.0.1',

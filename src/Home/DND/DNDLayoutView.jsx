@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {  Droppable, Draggable } from 'react-beautiful-dnd';
-import { Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { Button, Container, Row, Col, Card, ToggleButton } from 'react-bootstrap';
 
 export default class DNDLayoutView extends Component {
     render() {
@@ -34,56 +34,96 @@ export default class DNDLayoutView extends Component {
                 <Row>
                     <Col hidden={expand} lg="4">
                         <Row>
-                        <Card>
-                            {searchForm}
-                        </Card>
+                            <Card>
+                                {searchForm}
+                            </Card>
                         </Row>
-                        <Droppable droppableId="droppable1">
-                            {(provided, snapshot) => (
-                                <div style={{ backgroundColor: snapshot.isDraggingOver && 'green' }}>
-                                    <div
-                                        ref={provided.innerRef}
-                                    >
-                                        {items.map((item, index) => (
-                                            <Draggable key={item.id} draggableId={item.id} index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div>
-                                                        <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
+                        <Row style={{ height: "100vh" }} noGutters>
+                                <Col className="h-50 d-inline-block" style={{ overflowY: "scroll" }} lg="12">
+                        <Card>
+                            <Row noGutters>
+                                <Col lg='1'>
+                                    o
+                                </Col>
+                                <Col lg='5'>
+                                    Palabras Claves
+                                </Col>
+                                <Col lg='2'>
+                                    Bus que da
+                                </Col>
+                                <Col lg='2'>
+                                    CPC
+                                </Col>
+                                <Col lg='2'>
+                                    Comp. SEO
+                                </Col>
+                            </Row>
+                                    <Droppable droppableId="droppable1">
+                                        {(provided, snapshot) => (
+                                            <div style={{ backgroundColor: snapshot.isDraggingOver && 'green' }}>
+                                                <div
+                                                    ref={provided.innerRef}
+                                                >
+                                                    {items.map((item, index) => (
+                                                        <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                            {(provided, snapshot) => (
+                                                                <div>
+                                                                    <div
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
 
-                                                        >
-                                                            <span size='large'
-                                                                style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
-                                                            >{item.content}
-                                                            </span>
-                                                        </div>
-                                                        {provided.placeholder}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                </div>
-                            )}
-                        </Droppable>
+                                                                    >
+                                                                        <Row noGutters>
+                                                                            <Col lg='1'>
+                                                                                <input type="checkbox" />
+                                                                            </Col>
+                                                                            <Col lg='5'>
+                                                                                <span size='large'
+                                                                                    style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
+                                                                                >
+                                                                                    {item.key}
+                                                                                </span>
+                                                                            </Col>
+                                                                            <Col lg='2'>
+                                                                                {item.volume}
+                                                                            </Col>
+                                                                            <Col lg='2'>
+                                                                                {item.cpc}
+                                                                            </Col>
+                                                                            <Col lg='2'>
+                                                                                {item.competencia}
+                                                                            </Col>
+                                                                        </Row>
+                                                                    </div>
+                                                                    {provided.placeholder}
+                                                                </div>
+                                                            )}
+                                                        </Draggable>
+                                                    ))}
+                                                    {provided.placeholder}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </Droppable>
+                                    {isSearching ?
+                                        <React.Fragment>
+                                            {serpTable}
+                                        </React.Fragment> : null
+                                    }
+                        </Card>
+                                </Col>
                         {isSearching ?
-                        <Row style={{ height: "100vh" }}>
-                            <Col className="h-50 d-inline-block" style={{ overflowY: "scroll" }} lg="12">
-                                <Card>
-                                    {serpTable}
-                                </Card>
-                            </Col>
-                            <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
-                            <Col className="h-50 d-inline-block" style={{ overflowY: "scroll" }} lg="12">
-                                <Card>
-                                    {rankTable}
-                                </Card>
-                            </Col>
-                        </Row> : null
-                    }
+                            <React.Fragment>
+                                <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
+                                <Col className="h-50 d-inline-block" style={{ overflowY: "scroll" }} lg="12">
+                                    <Card>
+                                        {rankTable}
+                                    </Card>
+                                </Col>
+                            </React.Fragment> : null
+                        }
+                        </Row>
                     </Col>
                     <Col>
                         <Card>

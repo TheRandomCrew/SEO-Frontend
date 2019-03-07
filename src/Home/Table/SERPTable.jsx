@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Card, Alert } from 'react-bootstrap'
-import TableView from './SERPTableView';
+import TableView from './SERPTableView.jsx';
 import '../../Utils/spiner.css'
 
 export default class SERPTable extends Component {
@@ -34,8 +34,9 @@ export default class SERPTable extends Component {
                 Espere por favor
               </Card.Subtitle>
             </Card.Body>
-          </Card> :
-          <TableView tableData={data} set={set}/>
+          </Card> : 
+          null
+          // <TableView tableData={data} set={set}/>
         }
 
       </React.Fragment>
@@ -54,6 +55,7 @@ export default class SERPTable extends Component {
   }
 
   serpAPI = async (data) => {
+    const { filter, set } = this.props
     const { keywords } = data
     await axios({
       method: 'post',
@@ -69,8 +71,8 @@ export default class SERPTable extends Component {
         const { meta, related } = serpKeywords;
         const { total_count } = meta
         if (status === 'ok' && related !== 'No data') {
-          const tableData = this.serpApiData(related, meta.keyword.trim().toLowerCase())
-          this.props.set('stats', { total_count, results_time })
+          const tableData = this.serpApiData(related, meta.keyword.trim().toLowerCase(), filter)
+          set('stats', { total_count, results_time })
           this.setState({
             ...this.state,
             tableData,
@@ -93,7 +95,7 @@ export default class SERPTable extends Component {
       });
   }
 
-  serpApiData = (APIDATA, kywd) => {
+  serpApiData = (APIDATA, kywd, filter) => {
     let newKeywd = [], completeKywd = [], startKywd = [], containKywd = [], restKywd = [];
     // eslint-disable-next-line
     APIDATA.map((keywords) => {
@@ -117,8 +119,10 @@ export default class SERPTable extends Component {
     })
 
     newKeywd = completeKywd.concat(startKywd, containKywd, restKywd);
-    let serpStats = newKeywd.map((keywords) => {
+    let serpStats = newKeywd.map((keywords, index) => {
       const row = {
+        id: `${index}-`,
+        content: keywords.key,
         key: keywords.key,
         volume: keywords.search_volume,
         cpc: keywords.cpc,
@@ -126,10 +130,10 @@ export default class SERPTable extends Component {
       };
       return row;
     })
-
-    this.props.set('serpData', serpStats)
+    let caca = this.serpFilter(serpStats, filter)
+    this.props.set('serpData', caca)
     let serpAPI = {
-      rows: serpStats,
+      rows: caca,
       columns: [
         { name: 'keywords', title: 'Palabras Claves' },
         { name: 'volume', title: 'Vo lu men' },
@@ -176,28 +180,20 @@ export default class SERPTable extends Component {
       }
     })
 
-    let serpStats = newKeywd.map((keywords) => {
+    let serpStats = newKeywd.map((keywords, index) => {
       let comp = Math.round(keywords.competencia * 100);
       if (comp === 0) { comp = 1; }
       const row = {
-        keywords: keywords.key,
+        id: `${index}-`,
+        content: keywords.key,
+        key: keywords.key,
         volume: keywords.volume,
         cpc: Math.floor((keywords.cpc + 0.01) * 100) / 100 + '€',
         competencia: comp
       };
       return row;
     })
-
-    let serpAPI = {
-      rows: serpStats,
-      columns: [
-        { name: 'keywords', title: 'Palabras Claves' },
-        { name: 'volume', title: 'Vo lu men' },
-        { name: 'cpc', title: 'CPC' },
-        { name: 'competencia', title: 'Com pe ten cia' }
-      ]
-    }
-    return serpAPI;
+    return serpStats;
   }
 }
 const defaultStatus = {
@@ -205,7 +201,13 @@ const defaultStatus = {
   isLoading: true,
   tableData: {
     rows: [
-      { keywords: 'null', volume: '0', cpc: '0.0', competencia: '0.0' }
+      { keywords: 'null', 
+      volume: '0', 
+      cpc: '0.0', 
+      competencia: '0.0', 
+      id: '0',
+      content: "-"
+    }
     ],
     columns: [
       { name: 'keywords', title: 'Palabras Claves' },

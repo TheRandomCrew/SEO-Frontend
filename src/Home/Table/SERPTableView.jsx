@@ -26,7 +26,7 @@ class TableView extends React.Component {
   selectRows(selectionArray){
     const {rows} = this.props.tableData
     const newrows = selectionArray.map(select=>rows[select])
-    this.props.set('serpData', newrows)
+    this.props.set('serpData', newrows) // <---------------- this changes the selected rows
   }
   render() {
     const { columnWidths, volumeColumn, selection } = this.state;

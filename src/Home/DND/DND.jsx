@@ -6,12 +6,14 @@ import EditorView from '../Editor';
 //this is just an array of items to start out using
 //you don't have to declare it here, you could declare it down in state if you wanted
 //I think you have to have content and id in each item
-const staticItems = [{ content: "Casa", id: "1" },
-{ content: "Casa en la playa", id: "2" },
-{ content: "Casa pequena", id: "3" },
-{ content: "Casa en alquiler", id: "4" },
-{ content: "Casas cerca de mi en venta", id: "5", words: `Casas cerca de tu ubicacion en <<recipientName>> en venta.` },
-{ content: "Casas expropiadas", id: "6", words: `Casas expropiadas en <<recipientName>>.` }
+const staticItems = [
+    { key: '-', volume: 0, cpc: 0, competencia: 0, id: '0', content: '-' },
+    // { content: "Casa", id: "1" },
+    // { content: "Casa en la playa", id: "2" },
+    // { content: "Casa pequena", id: "3" },
+    // { content: "Casa en alquiler", id: "4" },
+    // { content: "Casas cerca de mi en venta", id: "5", words: `Casas cerca de tu ubicacion en <<recipientName>> en venta.` },
+    // { content: "Casas expropiadas", id: "6", words: `Casas expropiadas en <<recipientName>>.` }
 ]
 
 //'reorder' reorders the list it is given, moving the draggable from the startIndex to the endIndex and returning an array
@@ -68,6 +70,18 @@ class DND extends Component {
         articleKeywords: "",
         isArticleTitleArray: false
     };
+
+    componentDidMount(){
+        this.setState({...this.state, items: this.props.serpData})
+    }
+
+    componentDidUpdate(prevProps){
+        const { serpData } = this.props
+        if (serpData !== prevProps.serpData){
+            console.log(serpData)
+            this.setState({...this.state, items: serpData})
+        }
+    }
 
     //this function turns the message display on and off
     toggleMessage = () => this.setState((prevState) => ({ hidden: !prevState.hidden }));
