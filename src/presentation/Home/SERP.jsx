@@ -1,30 +1,19 @@
 import React from 'react'
-import styled from 'styled-components'
 import EditorColumn from './EditorColumn/EditorColumn';
 import TableColumn from 'containers/Home/TablesColumn/TableColumn';
+import { Grid, Column } from 'styles/GridStyled';
 
 const SERP = ({ hide }) => {
     return (
         <Grid>
-            <ColThird hidden={hide}>
-                <TableColumn/>
-            </ColThird>
-            <Col>
-                <EditorColumn/>
-            </Col>
+            <Column md={5} hidden={hide}>
+                <TableColumn />
+            </Column>
+            <Column >
+                <EditorColumn />
+            </Column>
         </Grid>
     )
 }
 
 export default SERP
-
-const Grid = styled.div`
-    display: flex;
-`
-const ColThird = styled.div`
-    flex: 0 0 30%;
-`
-
-const Col = styled.div`
-    flex:1;
-`

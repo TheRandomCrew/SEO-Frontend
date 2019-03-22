@@ -13,7 +13,7 @@ const SearchForm = ({
 }) => {
   return (
     <div>
-      <SearchBox query={query} setQuery={setPair}/>
+      <SearchBox query={query} setQuery={setPair} ip={ip}/>
       <Button onClick={() => setHide(!hide)}>Filtrar</Button>
       {hide&&<Preferences setFilter={setPair} filter={filter}/>}      
     </div>
