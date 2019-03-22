@@ -2,7 +2,6 @@ import React from 'react'
 import { render } from 'react-dom'
 import registerServiceWorker from './utils/registerServiceWorker'
 import Routes from './routes'
-import AppState from './state'
 import './styles/normalize.css'
 import './styles/globalStyles'
 
@@ -13,9 +12,7 @@ import './styles/globalStyles'
 // })
 
 render(
-  <AppState>
-      <Routes />
-  </AppState>,
+      <Routes />,
   document.getElementById('root')
 )
 registerServiceWorker()

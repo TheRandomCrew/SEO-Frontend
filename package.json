@@ -1,14 +1,22 @@
 {
-  "name": "starter",
-  "version": "0.1.0",
+  "name": "keyword-tools",
+  "version": "2.0.0",
+  "author": "Israel-Laguan <https://github.com/Israel-Laguan>,Luis <https://github.com/luis-rp>",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "html2plaintext": "^2.1.2",
+    "jquery": "^3.3.1",
     "lscache": "^1.1.0",
     "react": "^16.3.2",
+    "react-awesome-styled-grid": "^2.2.2",
+    "react-beautiful-dnd": "^10.0.4",
     "react-dom": "^16.3.2",
+    "react-froala-wysiwyg": "^2.9.3",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-toastify": "^3.0.0",
+    "readability-meter": "^1.0.0",
     "styled-components": "^3.2.6"
   },
   "scripts": {
@@ -17,7 +25,18 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "react-router-dom": "^4.2.2"
+  "devDependencies": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luis-rp/serp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luis-rp/serp/issues"
   }
 }

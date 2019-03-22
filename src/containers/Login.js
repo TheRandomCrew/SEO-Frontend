@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
-import tokenService from '../services/token'
-import { history } from '../routes'
 import { Redirect } from 'react-router-dom'
+import tokenService from 'services/token'
+import { history } from 'routes'
+import {default as LoginView} from 'presentation/Login'
 
 class Login extends PureComponent {
   login = () => {
@@ -13,9 +14,7 @@ class Login extends PureComponent {
     return tokenService.get() ? (
       <Redirect to="/" />
     ) : (
-        <div className="Login">
-          <button onClick={this.login}>Login</button>
-        </div>
+        <LoginView login={this.login}/>
       )
   }
 }
