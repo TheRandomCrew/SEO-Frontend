@@ -1,21 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import Preferences from './SearchForm/Preferences';
-import SearchBox from './SearchForm/SearchBox';
+import SearchBox from 'containers/Home/TablesColumn/SearchBox';
+import Preferences from 'containers/Home/TablesColumn/Preferences';
 
 const SearchForm = ({
-  setPair,  
-  setHide, 
-  filter,
-  query,
-  hide, 
+  setPair,
+  setHide,
+  serpData,
+  hide,
   ip
 }) => {
   return (
     <div>
-      <SearchBox query={query} setQuery={setPair} ip={ip}/>
+      <SearchBox setQuery={setPair} ip={ip} />
       <Button onClick={() => setHide(!hide)}>Filtrar</Button>
-      {hide&&<Preferences setFilter={setPair} filter={filter}/>}      
+      {
+        hide && <Preferences
+          setFilter={setPair}
+          setHide={setHide}
+          serpData={serpData}
+        />
+      }
     </div>
   )
 }

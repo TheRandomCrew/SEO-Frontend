@@ -1,27 +1,43 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import TypeAhead from './TypeAhead';
 import { Row } from 'styles/GridStyled';
 import { Column } from 'styles/GridStyled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SearchBox = ({ query, setQuery, ip }) => {
+const SearchBox = ({
+  setLanguages,
+  setKeywords,
+  submitQuery,
+  keywords,
+  languages = [] }) => {
   return (
     <Row>
-      <Column md={5}>
-        <InputText
-          type="text"
-          // onChange={onChange}
-          // onKeyDown={onKeyDown}
-          // value={userInput}
-          placeholder={'Palabra Clave'}
-        />
-      </Column>
-      <Column md={5}>
-        <TypeAhead query={query} />
-      </Column>
-      <Column md={2}>
-        <ButtonSearch onClick={() => setQuery()}>Buscar</ButtonSearch>
-      </Column>
+        <Column md={1}>
+          <button disabled>
+            <FontAwesomeIcon icon="search" />
+          </button>
+        </Column>
+        <Column md={4}>
+          <InputText
+            type="text"
+            onChange={e => setKeywords(e.target.value)}
+            value={keywords}
+            placeholder={'Palabra Clave'}
+            required
+            autoFocus
+          />
+        </Column>
+        <Column md={5}>
+          <TypeAhead setLanguages={setLanguages} languages={languages} />
+        </Column>
+        <Column md={2}>
+          <ButtonSearch
+            onClick={() => submitQuery()}
+          >
+            Buscar
+          </ButtonSearch>
+        </Column>
     </Row>
   )
 }

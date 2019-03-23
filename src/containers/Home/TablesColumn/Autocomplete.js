@@ -24,7 +24,8 @@ class Autocomplete extends Component {
       // Whether or not the suggestion list is shown
       showSuggestions: false,
       // What the user has entered
-      userInput: ""
+      userInput: "",
+      placeholder: '🇧🇴Bolivia / Spanish (Latin America) - Español (Latinoamérica)'
     };
   }
 
@@ -51,6 +52,7 @@ class Autocomplete extends Component {
 
   // Event fired when the user clicks on a suggestion
   onClick = e => {
+    this.props.setLanguages(e.currentTarget.innerText)
     // Update the user input and reset the rest of the state
     this.setState({
       activeSuggestion: 0,
@@ -67,6 +69,7 @@ class Autocomplete extends Component {
     // User pressed the enter key, update the input and close the
     // suggestions
     if (e.keyCode === 13) {
+      this.props.setLanguages(e.currentTarget.innerText)
       this.setState({
         activeSuggestion: 0,
         showSuggestions: false,
@@ -100,19 +103,17 @@ class Autocomplete extends Component {
         activeSuggestion,
         filteredSuggestions,
         showSuggestions,
-        userInput
-      },
-      props:{
-          placeholder
+        userInput,
+        placeholder
       }
     } = this;
 
     let suggestionsListComponent;
-
+// TODO: move this outside render
     if (showSuggestions && userInput) {
       if (filteredSuggestions.length) {
         suggestionsListComponent = (
-          <ul class="suggestions">
+          <ul className="suggestions">
             {filteredSuggestions.map((suggestion, index) => {
               let className;
 
@@ -155,6 +156,18 @@ class Autocomplete extends Component {
       </Fragment>
     );
   }
+
+  componentDidMount() {
+    if (localStorage.hasOwnProperty('language')) {
+      try {
+        let language = localStorage.getItem('language');
+        this.props.setLanguages(language)
+        this.setState({placeholder:language})
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
 }
 
 export default Autocomplete;
@@ -163,5 +176,3 @@ const NoSugestions = styled.div`
     color: #999;
     padding: 0.5rem;
 `
-
-  

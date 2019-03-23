@@ -180,8 +180,6 @@ const languages = [
     { flag: "🇱🇻", value: "LV:lt:Latvia:Lithuanian", text: "Latvia / Lithuanian - Lietuvių" },
     { flag: "🇱🇻", value: "LV:lv:Latvia:Latvian", text: "Latvia / Latvian - Latviešu" },
     { flag: "🇱🇻", value: "LV:ru:Latvia:Russian", text: "Latvia / Russian - Русский" },
-    { flag: "🇱🇦", value: "LA:en:Laos:English", text: "Laos / English" },
-    { flag: "🇱🇦", value: "LA:en:Laos:English", text: "Laos / English" },
     { flag: "🇱🇧", value: "LB:ar:Lebanon:ArabiXc", text: "Lebanon / Arabic - العربية" },
     { flag: "🇱🇧", value: "LB:en:Lebanon:English", text: "Lebanon / English" },
     { flag: "🇱🇧", value: "LB:fr:Lebanon:French", text: "Lebanon / French - Français" },

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { default as SearchFormView } from 'presentation/Home/TablesColumn/SearchForm';
+import {
+    default as SearchFormView
+} from 'presentation/Home/TablesColumn/SearchForm';
 
-const SearchForm = (query, filter, setPair) => {
+const SearchForm = ({ setPair, serpData }) => {
     const [hide, setHide] = useState(false)
     const [ip, setIp] = useState('0.0.0.1')
 
@@ -11,25 +13,23 @@ const SearchForm = (query, filter, setPair) => {
         })
             .then((res) => {
                 const ip = res.data
-                console.log(ip)
-                return ip
+                setIp(ip)
             })
             .catch((e) => {
                 console.log(e)
-                return '0.0.0.1'
+                setIp('0.0.0.1')
             })
     }
 
     useEffect(() => {
-        setIp(getIP())
-    }, [])
+        getIP()
+    })
 
     return (
         <SearchFormView
             ip={ip}
             hide={hide}
-            query={query}
-            filter={filter}
+            serpData={serpData}
             setHide={setHide}
             setPair={setPair}
         />

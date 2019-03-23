@@ -1,13 +1,13 @@
 import React from 'react'
 import { default as UpperRowView } from 'presentation/Home/EditorColumn/UpperRow';
-import AppState from 'state/App';
+import DNDContext from 'state/DNDContext';
 
-const { Consumer } = AppState;
+const { Consumer } = DNDContext;
 
 const UpperRow = () => {
     return (
         <Consumer>
-            {({ state, actions }) => (
+            {({ state }) => (
                 <UpperRowView
                     DnDTitleItems={state.DnDTitleItems}
                 />

@@ -24,6 +24,10 @@ class AppState extends Component {
   }
 
   setPair = (key, value) => {
+    console.log('key',key, ':\n', value)
+    if (key==='query'){
+      console.log('Put your axios call here, you dummy!')
+    }
     this.setState({ [key]: value })
   }
 
@@ -37,7 +41,7 @@ export default AppState;
 const initialState = {
   query: {
     keywords: '',
-    select: "BO:es:Bolivia:Espanol (Latinoamerica):67"
+    language: "BO:es:Bolivia:Espanol (Latinoamerica):67" // TODO: check that this value shows in TypeAhead 
   },
   filter: {
     minVolume: 0,

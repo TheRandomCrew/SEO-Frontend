@@ -1,15 +1,13 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Autocomplete from 'containers/Home/TablesColumn/Autocomplete';
-import languages from 'utils/languages';
 
-const TypeAhead = () => {
+const TypeAhead = ({setLanguages, languages=[]}) => {
   return (
-    <Fragment>      
-      <Autocomplete
+    <Autocomplete
         suggestions={languages.map(lang => lang.flag + lang.text)}
         placeholder={'🇧🇴Bolivia / Spanish (Latin America) - Español (Latinoamérica)'}
+        setLanguages={setLanguages}
       />
-    </Fragment>
   )
 }
 
