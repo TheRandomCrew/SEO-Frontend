@@ -1,80 +1,42 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
 import { Row } from 'styles/GridStyled';
+import SaveArticle from './SaveArticle';
+import ArticleToPDF from 'containers/Home/EditorColumn/ArticleToPDF';
+import SEORank from 'containers/Home/EditorColumn/SEORank';
+import Readability from 'containers/Home/EditorColumn/Readability';
+import Plagiarism from 'containers/Home/EditorColumn/Plagiarism';
 
-const InfoButtons = ({ 
+const InfoButtons = ({
     saveArticle,
-    readabilityResult,
-    convertHtmlToPdf,
-    pdf,
-    loadingPDF,
-    loadingCopyleaks,
-    copyLeaksStatus,
-    checkCopyLeaks,
-    editorString }) => {
+    message,
+    textHtml,
+    serpData,
+    rankData,
+    article
+}) => {
     return (
         <Row>
-            <Button
-            // onClick={() => this.saveArticle()} size="sm"
-            >
-                Guardar Articulo
-            </Button>
-            <Button
-            // onClick={() => this.convertHtmlToPdf()} size="sm"
-            >
-                {loadingPDF ? <p>Generando...</p> 
-                : 
-                <p>Generar PDF <br />para Descargar Articulo</p>
-                }
-            </Button>
-            {pdf && <a
-                href={pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Descargar Pdf
-                </a>}
-            <RoundedButton
-            >
-                Puntuacion <br />SEO
-            </RoundedButton>
-            <RoundedButton
-                // onClick={() => this.readabilityArticle()}
-            >
-                <p>Indice de <br />Legibilidad</p>
-                {/* {readabilityResult && readabilityResult} */}
-            </RoundedButton>
-            <Button
-                size="sm"
-                // onClick={checkCopyLeaks()}
-                disabled={loadingCopyleaks || editorString === ''}
-            >
-                Comprobar Plagio
-            </Button>
-
-            {/* {copyLeaksStatus !== '' && <p>{copyLeaksStatus}</p>} */}
-
-            {/* {arrayPlagios.length !== 0 &&
-                    <p> {arrayPlagios} </p>
-                } */}
-
-            {/* {loadingCopyleaks && <p>Esto podría demorar unos minutos, por favor espere..</p>} */}
-
+            <SaveArticle
+                saveArticle={saveArticle}
+                message={message}
+            />
+            <ArticleToPDF
+                textHtml={textHtml} // TODO: change this to a mix of all
+            />
+            <SEORank
+                textHtml={textHtml}
+                serpData={serpData}
+                rankData={rankData}
+                article={article}
+            />
+            <Readability
+                textHtml={textHtml}
+            />
+            <Plagiarism
+                text={article.text}
+            />
         </Row>
     )
 }
 
-export default InfoButtons
-
-const Button = styled.button`
-    background: #2780E3;
-    color: #fff;
-`
-
-const RoundedButton = styled.button`
-    border-radius: 50%;
-    padding: 20px;
-    display: inline-block;
-    background: #2780E3;
-    color: #fff;
-`
+export default InfoButtons;

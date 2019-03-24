@@ -3,6 +3,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import DNDLayoutView from 'presentation/Home/DNDLayoutView';
 
 const DroppableAndDraggable = ({ items, droppableId, children=undefined }) => {
+    console.log(items)
     return (
         <Droppable droppableId={droppableId}>
             {(provided, snapshot) => (

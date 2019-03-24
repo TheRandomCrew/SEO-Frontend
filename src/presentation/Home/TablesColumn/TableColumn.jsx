@@ -4,15 +4,16 @@ import DroppableAndDraggable from 'containers/Droppable';
 import { Bordered } from 'styles/GridStyled';
 import Search from 'containers/Home/TablesColumn/Search';
 import SerpTableHeader from 'containers/Home/TablesColumn/SerpTableHeader';
+import Rank from 'containers/Home/TablesColumn/Rank';
 
 const TableColumn = ({ items }) => {
     return (
         <Bordered>
             <Grid>
-                <Search />  
+                <Search />
             </Grid>
             <Grid>
-                <SerpTableHeader/>
+                <SerpTableHeader />
             </Grid>
             <Grid>
                 <OverflowContainer>
@@ -20,11 +21,12 @@ const TableColumn = ({ items }) => {
                         <DroppableAndDraggable items={items} droppableId="keywords" />
                         {/* aca */}
                         SERPTable
+
+                        <Rank/>
                     </OverflowY>
                     <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
                     <OverflowY>
-                        {/* aca */}
-                        RankTable
+                        <Rank/>
                     </OverflowY>
                 </OverflowContainer>
             </Grid>

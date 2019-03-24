@@ -3,6 +3,7 @@ import appContext from './appContext'
 
 const { Provider } = appContext
 
+
 class AppState extends Component {
   state = {
     query: {
@@ -20,16 +21,32 @@ class AppState extends Component {
       eraseKeys: ''
     },
     serpData: [
-      { key: '-', volume: 0, cpc: 0, competencia: 0, id: 0, content: "|" }
+      { key: '0', volume: 0, cpc: 0, competencia: 0, id: 0, content: "|" },
+      { key: '1', volume: 0, cpc: 0, competencia: 0, id: 0, content: "|" }
     ],
-    rankData: [],
+    rankData: [
+      {
+        pos: 1,
+        title: 'google.com',
+        pda: '5.2',
+        shares: 'https://www.google.com',
+        url: 'https://www.google.com',
+      },
+      {
+        pos: 2,
+        title: 'facebook.com',
+        pda: '5.2',
+        shares: 'https://www.facebook.com',
+        url: 'https://www.facebook.com',
+      }
+    ],
     stats: { total_count: '', results_time: '-' },
-    article:{
+    article: {
       title: '',
-      meta:'',
-      text:''
+      meta: '',
+      text: ''
     }
-  };  
+  };
 
   render() {
     return (
@@ -58,7 +75,7 @@ class AppState extends Component {
 
   setPair = (key, value) => {
     this.getSerpData(value)
-    if (key==='query'){
+    if (key === 'query') {
     }
     this.setState({ [key]: value })
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
@@ -17,24 +17,33 @@ export default class Editor extends Component {
     this.config = {
       placeholderText: 'Escribe o pega el contenido a analizar',
       charCounterCount: true,
-      // documentReady: true
+      // documentReady: true`
     }
+    this.model = ''
   }
 
   handleModelChange = (model) => {
-    this.props.set('textHtml', model)
-    console.log(model)
+    this.model = model;
+  }
+
+  saveModel = () => {
+    this.props.set('textHtml', this.model)
     this.setState({
-      model: model
-    });
+      model: this.model
+    })
   }
   render() {
     return (
-      <FroalaEditor
-        model={this.state.model} //If I put strings looks like it convert them to html
-        onModelChange={this.handleModelChange} // a model in html is produced  here
-        config={this.config}
-      />
+      <Fragment>
+        <FroalaEditor
+          model={this.state.model} 
+          onModelChange={this.handleModelChange} 
+          config={this.config}
+        />
+        <button onClick={() => this.saveModel()}>
+          Guardar Texto
+        </button>
+      </Fragment>
     )
   }
 }

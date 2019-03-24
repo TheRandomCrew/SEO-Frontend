@@ -29,9 +29,11 @@ const ArticleStorage = ({ setPair, serpData, rankData, article }) => {
         }
     }
 
+    // TODO: Make a function to update title and meta from  DnD data
+
     const saveArticle = () => {
-        const article = { title, meta, text }
-        setPair('article', article)
+        const newArticle = { title, meta, text }
+        setPair('article', newArticle)
     }
 
 
@@ -39,13 +41,14 @@ const ArticleStorage = ({ setPair, serpData, rankData, article }) => {
         <UpperRow
             set={set}
             saveArticle={saveArticle}
-            title={title}
-            meta={meta}
-            text={text}
+            title={title}               // internal to be updated with DnD
+            meta={meta}                 // meta to be submitted after updated with DnD
+            text={text}                 // Same as before
             textHtml={textHtml}
             serpData={serpData}
             rankData={rankData}
-        />
+            article={article}
+            />
     )
 }
 
