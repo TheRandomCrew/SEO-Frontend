@@ -1,19 +1,14 @@
 import React from 'react';
 import styled from 'styled-components'
 import Analysis from './Analysis';
-import UpperRow from './UpperRow';
 import { Bordered } from 'styles/GridStyled';
+import UpperRow from 'containers/Home/EditorColumn/UpperRow';
 
-const EditorColumn = ({ DnDTitleItems,
-	// DnDMetaItems,
-	// DnDEditorItems,
-	DnDTargetID, }) => {
+const EditorColumn = () => {
 	return (
 		<Bordered>
 			<Grid>
-				<UpperRow
-					DnDTitleItems={DnDTitleItems}
-				/>
+				<UpperRow />
 			</Grid>
 			<Bordered>
 				<Analysis />

@@ -1,12 +1,16 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components'
 import DroppableAndDraggable from 'containers/Droppable';
-import Editor from 'utils/Editor';
+import Editor from 'containers/Home/EditorColumn/Editor';
 import { Row } from 'styles/GridStyled';
 const Article = ({
+    set, 
     DnDTitleItems,
     // DnDMetaItems,
     // DnDEditorItems
+    title, 
+    meta, 
+    text,
 }) => {
     return (
         <Fragment>
@@ -25,7 +29,7 @@ const Article = ({
             {/* <DroppableAndDraggable items={metaItems} droppableId="meta" /> */}
             <Row>
                 <ClearFix>
-                <Editor />
+                <Editor set={set}/>
                 </ClearFix>
             </Row>
         </Fragment>

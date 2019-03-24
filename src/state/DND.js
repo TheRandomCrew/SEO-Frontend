@@ -10,8 +10,8 @@ class DND extends Component {
         DnDTableItems: [{ key: '-', volume: 0, cpc: 0, competencia: 0, id: '0' }],
         DnDTitleItems: [],
         DnDMetaItems: [],
-        DnDEditorItems: [], // for the record
-        DnDTargetID: ''
+        DnDEditorItems: [], // TODO: make multidrop viable
+        DnDTargetID: '' // show what Draggable just received an item
     };
 
     render() {
@@ -31,6 +31,7 @@ class DND extends Component {
 
     componentDidMount() {
         // this.setState({...this.state, items: this.props.serpData})
+        console.log(this.props.serpData)
     }
 
     componentDidUpdate(prevProps) {
