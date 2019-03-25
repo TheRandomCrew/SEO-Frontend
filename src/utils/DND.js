@@ -17,6 +17,18 @@ export const reorder = (
 //and returns two arrays
 //this is a function (see the => below!) with many parameters
 //the stuff after : defines the acceptable types of the parameters
+
+export const move = (
+    sourceList: any[],
+    sourceStartIndex: number,
+    destinationList: any[],
+    destinationEndIndex: number): any[] => {
+    let sourceResult = Array.from(sourceList);
+    let removed = sourceResult[sourceStartIndex];
+    const destinationResult = Array.from(destinationList);
+    destinationResult.splice(destinationEndIndex, 0, removed);
+    return [sourceResult, destinationResult]
+    }
 export  const moveAndReorder = (
     sourceList: any[],
     sourceStartIndex: number,

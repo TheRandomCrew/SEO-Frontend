@@ -1,6 +1,6 @@
 {
   "name": "keyword-tools",
-  "version": "2.1.2",
+  "version": "2.1.4",
   "author": "Israel-Laguan <https://github.com/Israel-Laguan>,Luis <https://github.com/luis-rp>",
   "private": true,
   "dependencies": {

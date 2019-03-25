@@ -9,11 +9,10 @@ const Plagiarism = ({
     text, 
     loading 
 }) => {
-    console.log(plagiarism)
     return (
         <div className="tooltip">
             <Button
-                onClick={checkPlagiarism()}
+                onClick={()=>checkPlagiarism()}
                 disabled={loading || text === ''}
             >
                 Comprobar Plagio

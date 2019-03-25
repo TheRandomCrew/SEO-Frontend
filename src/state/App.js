@@ -22,7 +22,7 @@ class AppState extends Component {
     },
     serpData: [
       { key: '0', volume: 0, cpc: 0, competencia: 0, id: 0, content: "|" },
-      { key: '1', volume: 0, cpc: 0, competencia: 0, id: 0, content: "|" }
+      { key: '1', volume: 0, cpc: 0, competencia: 0, id: 1, content: "|" }
     ],
     rankData: [
       {
@@ -42,9 +42,10 @@ class AppState extends Component {
     ],
     stats: { total_count: '', results_time: '-' },
     article: {
-      title: '',
-      meta: '',
-      text: ''
+      title: [],
+      meta: [],
+      text: [],
+      textHtml:''
     }
   };
 
@@ -74,8 +75,8 @@ class AppState extends Component {
   }
 
   setPair = (key, value) => {
-    this.getSerpData(value)
     if (key === 'query') {
+      this.getSerpData(value)
     }
     this.setState({ [key]: value })
   }

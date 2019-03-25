@@ -1,6 +1,8 @@
 import React from 'react'
 import appContext from 'state/appContext';
-import ArticleStorage from './ArticleStorage';
+import {
+    default as UpperRowView
+} from 'presentation/Home/EditorColumn/UpperRow';
 
 const { Consumer } = appContext;
 
@@ -8,7 +10,7 @@ const UpperRow = () => {
     return (
         <Consumer>
             {({ state, actions }) => (
-                <ArticleStorage
+                <UpperRowView
                     setPair={actions.setPair}
                     serpData={state.serpData}
                     rankData={state.rankData}

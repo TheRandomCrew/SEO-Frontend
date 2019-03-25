@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { reorder, moveAndReorder } from '../utils/DND';
+import { reorder, move, moveAndReorder } from '../utils/DND';
 import DNDContext from './DNDContext'
 
 const { Provider } = DNDContext
@@ -10,7 +10,7 @@ class DND extends Component {
         DnDTableItems: [{ key: '-', volume: 0, cpc: 0, competencia: 0, id: '0' }],
         DnDTitleItems: [],
         DnDMetaItems: [],
-        DnDEditorItems: [], // TODO: make multidrop viable
+        DnDEditorItems: [], // TODO: make multidrop viable in Editor
         DnDTargetID: '' // show what Draggable just received an item
     };
 
@@ -19,7 +19,10 @@ class DND extends Component {
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Provider
                     value={{
-                        state: this.state
+                        state: this.state,
+                        actions: {
+                            addKeyword: this.addKeyword
+                        }
                     }}
                 >
                     {this.props.children}
@@ -30,15 +33,39 @@ class DND extends Component {
 
 
     componentDidMount() {
-        // this.setState({...this.state, items: this.props.serpData})
-        console.log(this.props.serpData)
+        this.setState({ ...this.state, DnDTableItems: this.props.serpData })
     }
 
     componentDidUpdate(prevProps) {
         const { serpData } = this.props
         if (serpData !== prevProps.serpData) {
-            console.log(serpData)
-            this.setState({ ...this.state, items: serpData })
+            console.log('serpData Changed')
+            this.setState({ ...this.state, DnDTableItems: serpData })
+        }
+    }
+
+    addKeyword = (key, array) => {
+        switch (key) {
+            case 'title':
+                {
+                    console.log(this.state.DnDTitleItems.concat(array))
+                    this.setState({ DnDTitleItems: this.state.DnDTitleItems.concat(array) })
+                    break;
+                }
+            case 'meta':
+                {
+                    this.setState({ DnDMetaItems: this.state.DnDMetaItems.concat(array) })
+                    break;
+                }
+            case 'text':
+                {
+                    this.setState({ DnDEditorItems: this.state.DnDEditorItems.concat(array) })
+                    break;
+                }
+
+            default:
+                console.log('No place for that value here')
+                break;
         }
     }
 
@@ -86,12 +113,14 @@ class DND extends Component {
                             //after we pass the parameters to moveAndReorder, we will get back an array of two arrays
                             //lists[0] will be the source droppable with the moved draggable taken out
                             //lists[1] will be the target droppable with the moved draggable added in at the correct index
-                            let lists = moveAndReorder(
+                            let lists = move(
                                 sourceList,
                                 source.index,
                                 destinationList,
                                 destination.index
                             );
+                            // set in state/App.js the new item
+                            this.props.setPair()
                             this.setState({
                                 DnDTableItems: lists[0],
                                 DnDTitleItems: lists[1],
@@ -101,7 +130,7 @@ class DND extends Component {
                         }
                         case 'meta': {
                             destinationList = DnDMetaItems;
-                            let lists = moveAndReorder(
+                            let lists = move(
                                 sourceList,
                                 source.index,
                                 destinationList,
@@ -116,7 +145,7 @@ class DND extends Component {
                         }
                         case 'editor': {
                             destinationList = DnDEditorItems;
-                            let lists = moveAndReorder(
+                            let lists = move(
                                 sourceList,
                                 source.index,
                                 destinationList,

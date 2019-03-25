@@ -4,7 +4,7 @@ import Layout from './Layout'
 import DND from '../state/DND';
 import SERP from '../containers/Home/SERP';
 
-const Home = ({ setHide, serpData, hide }) => {
+const Home = ({ setPair, setHide, title, meta, serpData, hide }) => {
     return (
         <Layout>
             <Main>
@@ -13,7 +13,12 @@ const Home = ({ setHide, serpData, hide }) => {
                         {hide ? <h6>Mostrar Tablas</h6> : <h6>Expandir Articulo</h6>}
                     </Button>
                 </RowCenter>
-                <DND serpData={serpData} >
+                <DND
+                    serpData={serpData}
+                    setPair={setPair}
+                    title={title}
+                    meta={meta}
+                >
                     <SERP hide={hide} />
                 </DND>
             </Main>

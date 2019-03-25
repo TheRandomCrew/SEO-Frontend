@@ -1,21 +1,20 @@
-import React from 'react'
-import { default as ArticleView } from 'presentation/Home/EditorColumn/Article';
+import React from 'react';
 import DNDContext from 'state/DNDContext';
+import ArticleStorage from './ArticleStorage';
+
 const { Consumer } = DNDContext;
 
-const Article = ({ set, title, meta, text }) => {
+const Article = ({ setPair }) => {
     return (
         <Consumer>
-            {({ state }) => (
-                <ArticleView
+            {({ state, actions }) => (
+                <ArticleStorage
+                    setPair={setPair}
+                    addKeyword={actions.addKeyword}
                     DnDTitleItems={state.DnDTitleItems}
                     DnDMetaItems={state.DnDMetaItems}
                     DnDEditorItems={state.DnDEditorItems}
                     DnDTargetID={state.DnDTargetID}
-                    set={set}
-                    title={title}
-                    meta={meta}
-                    text={text}
                 />
             )}
         </Consumer>

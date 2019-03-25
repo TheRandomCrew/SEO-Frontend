@@ -2,8 +2,7 @@ import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import DNDLayoutView from 'presentation/Home/DNDLayoutView';
 
-const DroppableAndDraggable = ({ items, droppableId, children=undefined }) => {
-    console.log(items)
+const DroppableAndDraggable = ({ items, droppableId, children = undefined }) => {
     return (
         <Droppable droppableId={droppableId}>
             {(provided, snapshot) => (
@@ -11,8 +10,9 @@ const DroppableAndDraggable = ({ items, droppableId, children=undefined }) => {
                     <div
                         ref={provided.innerRef}
                     >
+                        {droppableId === 'keywords' ? null:items.length > 0 ? 'Palabras Claves incluidas:' : 'Arrastra aca las palabras claves de la tabla'}
                         {items.map((item, index) => (
-                            <Draggable key={item.id} draggableId={item.id} index={index}>
+                            <Draggable key={item.key} draggableId={item.key} index={index}>
                                 {(provided, snapshot) => (
                                     <div>
                                         <div
@@ -26,12 +26,13 @@ const DroppableAndDraggable = ({ items, droppableId, children=undefined }) => {
                                                 snapshot={snapshot}
                                                 droppableId={droppableId}
                                             />
-                                            {provided.placeholder}
+                                            {droppableId === 'keywords' ? null : provided.placeholder}
                                         </div>
                                     </div>
                                 )}
                             </Draggable>
                         ))}
+                        {droppableId === 'keywords' ? null : provided.placeholder}
                     </div>
                     {children}
                 </div>

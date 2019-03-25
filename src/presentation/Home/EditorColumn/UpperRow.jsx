@@ -4,11 +4,7 @@ import InfoButtons from './InfoButtons';
 import { Row, Column } from 'styles/GridStyled';
 
 const UpperRow = ({
-    set,
-    title,
-    meta,
-    text,
-    textHtml,
+    setPair,
     serpData,
     rankData,
     article
@@ -18,16 +14,13 @@ const UpperRow = ({
             <Row>
                 <Column sm={12} md={10} lg={10}>
                     <Article
-                        set={set}
-                        title={title}
-                        meta={meta}
-                        text={text}
+                        setPair={setPair}
                     />
                 </Column>
                 <Column sm={12} md={2} lg={2}>
                     <InfoButtons
-                        set={set}
-                        textHtml={textHtml}
+                        set={setPair}
+                        textHtml={article.textHtml}
                         serpData={serpData}
                         rankData={rankData}
                         article={article}

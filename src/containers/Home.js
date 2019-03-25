@@ -8,9 +8,12 @@ const Home = () => {
     const [hide, setHide] = useState(false); // my first hook
     return (
         <Consumer>
-            {({ state }) => (
+            {({ state, actions }) => (
                 <HomeView
+                    setPair={actions.setPair}
                     serpData={state.serpData}
+                    title={state.title}
+                    meta={state.meta}
                     hide={hide}
                     setHide={setHide}
                 />

@@ -19,10 +19,6 @@ const TableColumn = ({ items }) => {
                 <OverflowContainer>
                     <OverflowY>
                         <DroppableAndDraggable items={items} droppableId="keywords" />
-                        {/* aca */}
-                        SERPTable
-
-                        <Rank/>
                     </OverflowY>
                     <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
                     <OverflowY>
