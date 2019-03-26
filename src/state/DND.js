@@ -47,8 +47,7 @@ class DND extends Component {
     addKeyword = (key, array) => {
         switch (key) {
             case 'title':
-                {
-                    console.log(this.state.DnDTitleItems.concat(array))
+                { // TODO: check this solution: console.log([...new Set([...array1, ...array2])]);  https://www.peterbe.com/plog/merge-two-arrays-without-duplicates-in-javascript
                     this.setState({ DnDTitleItems: this.state.DnDTitleItems.concat(array) })
                     break;
                 }

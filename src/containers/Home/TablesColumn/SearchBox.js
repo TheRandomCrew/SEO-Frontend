@@ -62,7 +62,7 @@ const SearchBox = ({ setQuery, ip }) => {
     const submitQuery = () => {
         // TODO: Add some sanitizing and error check
         if (keywords!=='')
-        setQuery('query', { keywords, language })
+        setQuery('query', { keywords, select: language })
     }
 
     return (

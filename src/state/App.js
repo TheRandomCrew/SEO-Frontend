@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 import appContext from './appContext'
 
 const { Provider } = appContext
@@ -8,7 +9,7 @@ class AppState extends Component {
   state = {
     query: {
       keywords: '',
-      language: "BO:es:Bolivia:Espanol (Latinoamerica):67" // TODO: check that this value shows in TypeAhead 
+      select: "BO:es:Bolivia:Espanol (Latinoamerica):67" // TODO: check that this value shows in TypeAhead 
     },
     filter: {
       minVolume: 0,
@@ -21,8 +22,7 @@ class AppState extends Component {
       eraseKeys: ''
     },
     serpData: [
-      { key: '0', volume: 0, cpc: 0, competencia: 0, id: 0, content: "|" },
-      { key: '1', volume: 0, cpc: 0, competencia: 0, id: 1, content: "|" }
+      { key: '-', search_volume: 0, cpc: 0, competition: 0, id: 0, checked: false }
     ],
     rankData: [
       {
@@ -45,7 +45,7 @@ class AppState extends Component {
       title: [],
       meta: [],
       text: [],
-      textHtml:''
+      textHtml: ''
     }
   };
 
@@ -74,9 +74,44 @@ class AppState extends Component {
     console.log('Put your axios call here, you dummy!', keywords)
   }
 
-  setPair = (key, value) => {
+  serpAPI = async (data = { keywords: '', select: '' }) => {
+    await axios({
+      method: 'post',
+      url: `http://server.borjamediavilla.com/api/serp`,
+      data,
+      crossdomain: true
+    })
+      .then(resp => {
+        const { data } = resp.data
+        console.log(resp.data)
+        const { results, status } = data;
+        const { serpKeywords } = results;
+        const { related } = serpKeywords;
+        if (status === 'ok' && related !== 'No data') {
+          // const tableData = related;
+          this.setState({
+            ...this.state,
+            serpData: related,
+            filter: { keywords: data.keywords, filter: data.filter }
+          })
+        }
+        else {
+          console.error('bad serp response:', related)
+          this.props.set({ error: 'bad serp response:' + related })
+          this.setState({
+            isLoading: false, error: 'bad serp response', showError: true
+          })
+        }
+      })
+      .catch(error => {
+        console.error('serp api error' + JSON.stringify(error))
+        this.setState({ isLoading: false, error })
+      });
+  }
+
+  setPair = (key, value = { keywords: '' }) => {
     if (key === 'query') {
-      this.getSerpData(value)
+      this.serpAPI(value)
     }
     this.setState({ [key]: value })
   }

@@ -22,7 +22,7 @@ const Article = ({
                     droppableId='title'
                 >
                     <input
-                        placeholder="Escribe el Titulo SEO" // debe cambiar DnDTitleItems en state/DND
+                        placeholder="Escribe el Titulo SEO"
                         onChange={e => set('title',e.target.value)} 
                         value={title}
                     />
