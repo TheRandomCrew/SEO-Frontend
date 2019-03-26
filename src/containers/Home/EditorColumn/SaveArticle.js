@@ -4,13 +4,13 @@ import {
 } from 'presentation/Home/EditorColumn/SaveArticle'
 const SaveArticle = ({ article }) => {
     const [message, setMessage] = useState('')
-    const saveArticle = () => {
-        console.log('save')
-        setMessage(article.text) // TODO: order article in order and save to DB
+    const saveArticleDB = () => {
+        console.log('save',article)
+        setMessage('Guardado') // TODO: mix tables and article in order and save to DB
     }
     return (
         <SaveArticleView
-            saveArticle={saveArticle}
+            saveArticleDB={saveArticleDB}
             message={message}
         />
     )

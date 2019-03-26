@@ -5,6 +5,7 @@ import Editor from 'containers/Home/EditorColumn/Editor';
 import { Row } from 'styles/GridStyled';
 const Article = ({
     set,
+    saveArticle,
     saveTitle,
     saveMeta,
     DnDTitleItems,
@@ -46,12 +47,14 @@ const Article = ({
                     </button>
                 </DroppableAndDraggable>
             </Row>
-            {/* <DroppableAndDraggable items={metaItems} droppableId="meta" /> */}
             <Row>
                 <ClearFix>
                     <Editor
                         set={set}
                     />
+                    <button onClick={()=>saveArticle()}>
+                        Save
+                    </button>
                 </ClearFix>
             </Row>
         </Fragment>

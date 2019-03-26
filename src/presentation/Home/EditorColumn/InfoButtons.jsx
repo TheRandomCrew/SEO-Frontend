@@ -1,14 +1,12 @@
 import React from 'react';
 import { Row } from 'styles/GridStyled';
-import SaveArticle from './SaveArticle';
 import ArticleToPDF from 'containers/Home/EditorColumn/ArticleToPDF';
 import SEORank from 'containers/Home/EditorColumn/SEORank';
 import Readability from 'containers/Home/EditorColumn/Readability';
 import Plagiarism from 'containers/Home/EditorColumn/Plagiarism';
+import SaveArticle from 'containers/Home/EditorColumn/SaveArticle';
 
 const InfoButtons = ({
-    saveArticle,
-    message,
     textHtml,
     serpData,
     rankData,
@@ -17,11 +15,10 @@ const InfoButtons = ({
     return (
         <Row>
             <SaveArticle
-                saveArticle={saveArticle}
-                message={message}
+                article={article}
             />
             <ArticleToPDF
-                textHtml={textHtml} // TODO: change this to a mix of all
+                textHtml={article.textHtml} // TODO: change this to a mix of all
             />
             <SEORank
                 textHtml={textHtml}
@@ -30,7 +27,7 @@ const InfoButtons = ({
                 article={article}
             />
             <Readability
-                textHtml={textHtml}
+                text={article.text}
             />
             <Plagiarism
                 text={article.text}

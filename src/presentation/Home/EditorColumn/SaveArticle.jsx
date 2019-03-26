@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import 'styles/ToolTip.css';
 
-const SaveArticle = ({ saveArticle, message }) => {
+const SaveArticle = ({ saveArticleDB, message }) => {
     return (
         <div className="tooltip">
             <Button
-            disabled
-                onClick={() => saveArticle()}
+                onClick={() => saveArticleDB()}
             >
                 Guardar Articulo
             </Button>

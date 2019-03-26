@@ -35,7 +35,7 @@ class AppState extends Component {
     article: {
       title: [],
       meta: [],
-      text: [],
+      text: '',
       textHtml: ''
     },
     showTables:false
@@ -60,7 +60,6 @@ class AppState extends Component {
   setPair = (key, value = { keywords: '' }) => {
     if (key === 'query') {
       this.serpAPI(value);
-      console.log('object')
       this.rankedAPI(value);
     }
     this.setState({ [key]: value })

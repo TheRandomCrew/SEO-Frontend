@@ -26,7 +26,12 @@ const ArticleToPDF = ({textHtml }) => {
 
     const generatePDF=() => {
         // TODO: Mix here title, meta, text and tables
-        convertHtmlToPdf(textHtml)
+        if (textHtml!==''){   
+            convertHtmlToPdf(textHtml)
+        }
+        else{
+            console.log('set editor text first and save article')
+        }
     }
     return (
         <ArticleToPDFView

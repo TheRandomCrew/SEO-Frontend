@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import 'styles/ToolTip.css'
 
-const ArticleToPDF = ({ ganeratePDF, pdf, loading }) => {
+const ArticleToPDF = ({ generatePDF, pdf, loading }) => {
     return (
         <div className="tooltip">
             <Button
-            disabled
-                onClick={() => ganeratePDF()}
+                onClick={() => generatePDF()}
             >
                 {loading ? <p>Generando...</p>
                     :

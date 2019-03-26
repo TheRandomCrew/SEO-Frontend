@@ -25,7 +25,7 @@ const InfoButtons = ({
         setNewArticle(article) // TODO: change this to mix other fields
       }
     },
-    [article, ])
+    [article ])
     return (
         <InfoButtons
             saveArticle={saveArticle}

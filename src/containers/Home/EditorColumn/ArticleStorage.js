@@ -42,11 +42,11 @@ const ArticleStorage = ({
     }
 
     const saveTitle = () =>{
-        let array = title.split(',').map((item, id)=>{
+        let array = title.split(',').map((item, id)=>{ //TODO: change items view cuase is a title not tags
             return({key:item, id:item+id})
         })
         addKeyword('title', array);
-        setTitle('')
+        // setTitle('')
     }
 
     const saveMeta = () =>{
@@ -54,16 +54,16 @@ const ArticleStorage = ({
             return({key:item, id:item+id})
         })
         addKeyword('meta', array)
-        setMeta('')
+        // setMeta('')
     }
 
     const saveText = () =>{
-        let array = text.split(',').map((item, id)=>{
+        let array = text.split(',').map((item, id)=>{ //TODO: change items view cuase is a title not tags
             return({key:item, id:item+id})
         })
-        addKeyword('text', array)
-        setText('');
-        setTextHtml('')
+        addKeyword('text', array.join())
+        // setText('');
+        // setTextHtml('')
     }
 
     return (

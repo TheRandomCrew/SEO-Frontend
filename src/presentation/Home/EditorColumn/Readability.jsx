@@ -6,7 +6,6 @@ const Readability = ({checkReadability, readability}) => {
   return (
     <div className="tooltip">
             <RoundedButton
-            disabled
                 onClick={() => checkReadability()}
             >
                 <p>Indice de <br />Legibilidad</p>                
