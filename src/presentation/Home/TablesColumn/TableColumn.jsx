@@ -6,26 +6,28 @@ import Search from 'containers/Home/TablesColumn/Search';
 import SerpTableHeader from 'containers/Home/TablesColumn/SerpTableHeader';
 import Rank from 'containers/Home/TablesColumn/Rank';
 
-const TableColumn = ({ items }) => {
+const TableColumn = ({ items, hidden }) => {
     return (
         <Bordered>
             <Grid>
                 <Search />
             </Grid>
-            <Grid>
-                <SerpTableHeader />
-            </Grid>
-            <Grid>
-                <OverflowContainer>
-                    <OverflowY>
-                        <DroppableAndDraggable items={items} droppableId="keywords" />
-                    </OverflowY>
-                    <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
-                    <OverflowY>
-                        <Rank />
-                    </OverflowY>
-                </OverflowContainer>
-            </Grid>
+            <div hidden={!hidden}>
+                <Grid>
+                    <SerpTableHeader />
+                </Grid>
+                <Grid>
+                    <OverflowContainer>
+                        <OverflowY>
+                            <DroppableAndDraggable items={items} droppableId="keywords" />
+                        </OverflowY>
+                        <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
+                        <OverflowY>
+                            <Rank />
+                        </OverflowY>
+                    </OverflowContainer>
+                </Grid>
+            </div>
         </Bordered>
     )
 }

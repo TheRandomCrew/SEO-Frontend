@@ -8,7 +8,7 @@ const SerpTableHeaderSelect = (serpData, set) => {
     },[])
 
     const setSelection = () => {
-        set('serpData', selected) // </------- Selection is new serpData
+        set('serpData', selected) // </------- TODO: Selection is new serpData
     }
   return (
     <SerpTableHeader 

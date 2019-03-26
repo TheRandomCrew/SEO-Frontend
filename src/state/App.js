@@ -25,18 +25,11 @@ class AppState extends Component {
     ],
     rankData: [
       {
-        pos: 1,
-        title: 'google.com',
-        pda: '5.2',
-        shares: 'https://www.google.com',
-        url: 'https://www.google.com',
-      },
-      {
-        pos: 2,
-        title: 'facebook.com',
-        pda: '5.2',
-        shares: 'https://www.facebook.com',
-        url: 'https://www.facebook.com',
+        pos: 0,
+        title: '-',
+        pda: '',
+        shares: '',
+        url: '',
       }
     ],
     article: {
@@ -44,7 +37,8 @@ class AppState extends Component {
       meta: [],
       text: [],
       textHtml: ''
-    }
+    },
+    showTables:false
   };
 
   render() {
@@ -67,13 +61,13 @@ class AppState extends Component {
     if (key === 'query') {
       this.serpAPI(value);
       console.log('object')
-      this.rankedAPI(value)
+      this.rankedAPI(value);
     }
     this.setState({ [key]: value })
   }
 
   serpAPI = async (data = { keywords: '', select: '' }) => {
-    this.rankedAPI(data)
+    this.rankedAPI(data);
     await axios({ // TODO: move axios calls to services/, also create new api
       method: 'post',
       url: `http://server.borjamediavilla.com/api/serp`,
@@ -263,6 +257,7 @@ class AppState extends Component {
 
   setPair = (key, value = { keywords: '' }) => {
     if (key === 'query') {
+      this.setState({showTables:true})
       this.serpAPI(value)
     }
     this.setState({ [key]: value })

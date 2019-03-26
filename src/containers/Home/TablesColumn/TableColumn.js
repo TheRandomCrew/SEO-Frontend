@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  default as TableColumnView
-} from 'presentation/Home/TablesColumn/TableColumn';
 import DNDContext from 'state/DNDContext';
+import Tables from './Tables';
 
 const { Consumer } = DNDContext;
 
@@ -10,9 +8,8 @@ const TableColumn = () => {
   return (
     <Consumer>
       {({ state }) => (
-        <TableColumnView
+        <Tables
           items={state.DnDTableItems}
-          DnDTargetID={state.DnDTargetID}
         />
       )}
     </Consumer>

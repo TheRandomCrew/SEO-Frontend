@@ -32,7 +32,7 @@ const Main = styled.main`
     margin-top: 50px;
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 `
 
 const RowCenter = styled.div`
