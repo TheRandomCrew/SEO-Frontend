@@ -12,7 +12,7 @@ const DroppableAndDraggable = ({ items, droppableId, children = undefined }) => 
                     >
                         {droppableId === 'keywords' ? null:items.length > 0 ? 'Palabras Claves incluidas:' : 'Arrastra aca las palabras claves de la tabla'}
                         {items.map((item, index) => (
-                            <Draggable key={item.key} draggableId={item.key} index={index}>
+                            <Draggable key={item.key+Math.random()} draggableId={item.key} index={index}>
                                 {(provided, snapshot) => (
                                     <div>
                                         <div

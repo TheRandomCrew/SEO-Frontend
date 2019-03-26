@@ -22,7 +22,7 @@ const TableColumn = ({ items }) => {
                     </OverflowY>
                     <span>TOP 10 DE LAS PALABRAS CLAVE PRINCIPAL</span>
                     <OverflowY>
-                        <Rank/>
+                        <Rank />
                     </OverflowY>
                 </OverflowContainer>
             </Grid>
@@ -41,5 +41,6 @@ const OverflowContainer = styled.div`
 `
 
 const OverflowY = styled.div`
+    height: 50vh;
     overflow-y: scroll;
 `
