@@ -97,7 +97,18 @@ const Preferences = ({
       </Row>
       <Row>
       <Column md={12}>
-      Palabras claves que contiene
+      <span
+            style={{
+              fontSize: "15px",
+              padding: "5px",
+              margin: "auto",
+              fontFamily: "Arial",
+              fontWeight: "bold"
+            }}
+          >
+            {" "}
+            Palabras claves que contiene
+          </span>
         <TextArea
           rows="3"
           placeholder="Ingrese Palabras Claves, una por linea"
@@ -109,7 +120,17 @@ const Preferences = ({
       </Row>
       <Row>
         <Column md={12}>
-        Excluir palabras claves
+        <span
+            style={{
+              fontSize: "15px",
+              padding: "5px",
+              margin: "auto",
+              fontFamily: "Arial",
+              fontWeight: "bold"
+            }}
+          >
+            Excluir palabras claves
+          </span>
         <TextArea
           rows="3"
           placeholder="Ingrese Palabras Claves a excluir, una por linea"
@@ -119,33 +140,43 @@ const Preferences = ({
           /> 
           </Column>
       </Row>
-      <Row>        
-        <Column md={3}>
-          <button 
-            onClick={()=>eraseFilter()}
-          >
-          Borrar
-          </button>
+      <Row>
+        <Column>
+          <Button onClick={() => eraseFilter()}> Borrar</Button>
         </Column>
-        <Column md={3}>
-          <button 
-          onClick={()=>submitFilter()}
-          >
-          Aplicar
-          </button>
+        <Column>
+          <Button onClick={() => submitFilter()}>Aplicar</Button>
         </Column>
       </Row>
       <hr />
     </div>
-  )
-}
+  );
+};
 
-export default Preferences
+export default Preferences;
 
 const InputRange = styled(InputText)`
-    width: 80%;
-`
+  width: 80%;
+`;
 
 const TextArea = styled.textarea`
-    width: 99%;
-`
+  width: 90%;
+  padding: 0px 10px;
+  border: 2px solid #04b509;
+  margin: auto;
+  @media (max-width: 768px) {
+    width: 85%;
+  }
+`;
+const Button = styled.button`
+  background: #04b509;
+  color: white;
+  padding: 1px 10px;
+  border: 2px solid #04b509;
+  border-radius: 10px;
+  box-shadow: 1px 2px #888888;
+  margin: 5px;
+  width: 90%;
+
+  display: block;
+`;

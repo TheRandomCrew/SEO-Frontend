@@ -8,10 +8,17 @@ const ArticleToPDF = ({ generatePDF, pdf, loading }) => {
             <Button
                 onClick={() => generatePDF()}
             >
-                {loading ? <p>Generando...</p>
-                    :
-                    <p>Generar PDF <br />para Descargar Articulo</p>
-                }
+                {loading ? (
+            <p>Generando...</p>
+          ) : (
+            <p>
+              Generar PDF <br />
+              <span style={{ fontSize: "12px" }}>
+                {" "}
+                para Descargar Articulo{" "}
+              </span>
+            </p>
+          )}
             </Button>
             <span>
                 {pdf && <a
@@ -32,6 +39,12 @@ const ArticleToPDF = ({ generatePDF, pdf, loading }) => {
 export default ArticleToPDF;
 
 const Button = styled.button`
-    background: #2780E3;
+    background: #2780e3;
     color: #fff;
+    padding: 0px 10px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    box-shadow: 1px 20px 3px 20px;
+    box-shadow: 1px 7px #888888;
+    margin: auto;
 `

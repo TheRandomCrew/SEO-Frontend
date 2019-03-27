@@ -32,6 +32,11 @@ const Plagiarism = ({
 export default Plagiarism;
 
 const Button = styled.button`
-    background: #2780E3;
+    background: #2780e3;
     color: #fff;
+    padding: 10px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    box-shadow: 1px 20px 3px 20px;
+    box-shadow: 1px 7px #888888;
 `

@@ -28,6 +28,8 @@ const SearchForm = ({
 export default SearchForm;
 
 const Button = styled.button`
-    background: #3FB618;
-    color: #fff;
+  background: #3fb618;
+  color: #fff;
+  padding: 10px;
+  border: 2px solid #25a62a;
 `

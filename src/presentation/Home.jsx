@@ -10,7 +10,15 @@ const Home = ({ setPair, setHide, title, meta, serpData, hide }) => {
             <Main>
                 <RowCenter>
                     <Button onClick={() => setHide(!hide)}>
-                        {hide ? <h6>Mostrar Tablas</h6> : <h6>Expandir Articulo</h6>}
+                    {hide ? (
+                <p style={{ fontSize: "15px", margin: "5px" }}>
+                  Mostrar Tablas
+                </p>
+              ) : (
+                <p style={{ fontSize: "15px", margin: "5px" }}>
+                  Expandir Articulo
+                </p>
+              )}
                     </Button>
                 </RowCenter>
                 <DND
@@ -46,6 +54,14 @@ const RowCenter = styled.div`
 `
 
 const Button = styled.button`
-    background: #07c;
+    background: #2780e3;
     color: #fff;
+    padding: 5px 5px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    height: 40px;
+    @media (max-width: 768px) {
+        margin-top: 50px;
+    }
 `

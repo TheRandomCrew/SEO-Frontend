@@ -21,6 +21,11 @@ const SaveArticle = ({ saveArticleDB, message }) => {
 export default SaveArticle;
 
 const Button = styled.button`
-    background: #2780E3;
+    background: #2780e3;
     color: #fff;
+    padding: 10px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    box-shadow: 1px 7px #888888;
+    margin-bottom: 5px;
 `

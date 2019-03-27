@@ -22,7 +22,7 @@ const Article = ({
                     items={DnDTitleItems}
                     droppableId='title'
                 >
-                    <input
+                    <InputText
                         placeholder="Escribe el Titulo SEO"
                         onChange={e => set('title',e.target.value)} 
                         value={title}
@@ -37,7 +37,7 @@ const Article = ({
                     items={DnDMetaItems}
                     droppableId="meta"
                 >
-                    <input
+                    <TextArea
                         placeholder="Escribe la meta descripcion SEO"
                         onChange={e => set("meta", e.target.value)}
                         value={meta}
@@ -65,4 +65,26 @@ export default Article
 
 const ClearFix = styled.div`
     overflow: auto;
-`
+`;
+const InputText = styled.input`
+  border: 1px solid #999;
+  padding: 0.5rem;
+  margin-bottom: 3px;
+  width: 70%;
+  height: 25px;
+  border: 2px solid grey;
+  border-radius: 25px;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 90%;
+  padding: 0px 10px;
+  border: 2px solid #04b509;
+  margin: auto;
+  @media (max-width: 768px) {
+    width: 85%;
+  }
+`;

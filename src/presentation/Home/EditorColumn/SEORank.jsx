@@ -29,6 +29,8 @@ const RoundedButton = styled.button`
     border-radius: 50%;
     padding: 20px;
     display: inline-block;
-    background: #2780E3;
+    background: #2780e3;
     color: #fff;
+    border: 2px solid blue;
+    box-shadow: 1px 7px #888888;
 `
