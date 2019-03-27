@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
-import h2p from 'html2plaintext'
+import React, { useState, useContext } from 'react'
+import h2p from 'html2plaintext';
+
+import appContext from 'state/appContext';
+import DNDContext from 'state/DNDContext';
 
 import { default as ArticleView } from 'presentation/Home/EditorColumn/Article';
 
-const ArticleStorage = ({
-    setPair,
-    addKeyword,
-    DnDTitleItems,
-    DnDMetaItems,
-    DnDEditorItems,
-}) => {
+const ArticleStorage = () => {
     const [title, setTitle] = useState('');
     const [meta, setMeta] = useState('');
-    const [text, setText] = useState('');    
+    const [text, setText] = useState('');
     const [textHtml, setTextHtml] = useState('');
+
+    const {
+        actions: {
+            addKeyword
+        },
+        state: {
+            DnDTitleItems,
+            DnDMetaItems,
+            DnDEditorItems
+        }
+    } = useContext(DNDContext);
+    const { actions: { setPair } } = useContext(appContext);
 
     const set = (key, value) => {
         // TODO: add some sanityzing to value
@@ -41,25 +50,25 @@ const ArticleStorage = ({
         setPair('article', newArticle);
     }
 
-    const saveTitle = () =>{
-        let array = title.split(',').map((item, id)=>{ //TODO: change items view cuase is a title not tags
-            return({key:item, id:item+id})
+    const saveTitle = () => {
+        let array = title.split(',').map((item, id) => { //TODO: change items view cuase is a title not tags
+            return ({ key: item, id: item + id })
         })
         addKeyword('title', array);
         // setTitle('')
     }
 
-    const saveMeta = () =>{
-        let array = meta.split(',').map((item, id)=>{
-            return({key:item, id:item+id})
+    const saveMeta = () => {
+        let array = meta.split(',').map((item, id) => {
+            return ({ key: item, id: item + id })
         })
         addKeyword('meta', array)
         // setMeta('')
     }
 
-    const saveText = () =>{
-        let array = text.split(',').map((item, id)=>{ //TODO: change items view cuase is a title not tags
-            return({key:item, id:item+id})
+    const saveText = () => {
+        let array = text.split(',').map((item, id) => { //TODO: change items view cuase is a title not tags
+            return ({ key: item, id: item + id })
         })
         addKeyword('text', array.join())
         // setText('');

@@ -14,7 +14,9 @@
 * Reduce non reusable components/hooks
 * Simplify DnD components/logic
 * Add more micro-interactions
-* **Ckeck system in SerpTable must work properly**
+* **Check system in SerpTable must work properly**
 * **Editor must work with DnD**
-* **Find a way to reduce buttons in async components**
+* **Find a way to reduce buttons in async components (upperRow)**
 * **Improve loading and status IU/UX** 
+* **Verify Filter works properly**
+* **Add more loadings and processing feedback**

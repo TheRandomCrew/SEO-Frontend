@@ -9,8 +9,8 @@ const Readability = ({checkReadability, readability}) => {
                 onClick={() => checkReadability()}
             >
                 <p>Indice de <br />Legibilidad</p>                
+            <span>{readability!==0 && readability}</span>
             </RoundedButton>
-            <span>{readability && readability}</span>
             <span className="tooltiptext">
                 Analiza que tan facil resulta leer el texto del articulo
             </span>

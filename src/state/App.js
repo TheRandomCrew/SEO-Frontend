@@ -259,6 +259,7 @@ class AppState extends Component {
       this.setState({showTables:true})
       this.serpAPI(value)
     }
+    console.log(key)
     this.setState({ [key]: value })
   }
 }

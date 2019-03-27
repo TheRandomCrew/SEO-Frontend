@@ -13,8 +13,13 @@ const Article = ({
     // DnDEditorItems,
     title,
     meta,
-    // text
+    text
 }) => {
+    const WordCount = (s) => {
+        return s.split(' ')
+            .filter(function (n) { return n !== '' })
+            .length;
+    }
     return (
         <Fragment>
             <Row>
@@ -57,6 +62,8 @@ const Article = ({
                     </button>
                 </ClearFix>
             </Row>
+            <Row>Numero de Palabras {WordCount(text)}</Row>
+            <Row>Palabras Claves Anadidas {DnDMetaItems.length}</Row>
         </Fragment>
     )
 }

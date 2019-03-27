@@ -31,7 +31,7 @@ const SearchBox = ({ setQuery, ip }) => {
                             lang.location.languages[0].native
                         console.log('Retrieved from your Locale Info: \n', longLangAPI, ',', langAPI)
                         setLanguage(langAPI);
-                        setLongLanguage(longLangAPI)
+                        setLongLanguage(longLangAPI)                        
                     }
                     else {
                         console.log('Bad localLang response:', res.data)
