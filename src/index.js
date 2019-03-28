@@ -1,9 +1,7 @@
-import React from 'react'
-import { render } from 'react-dom'
-import registerServiceWorker from './utils/registerServiceWorker'
-import Routes from './routes'
-import './styles/normalize.css'
-import './styles/globalStyles'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { GlobalStyle } from './style/globalStyles'
+import * as serviceWorker from './util/serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faSearch,
@@ -16,6 +14,7 @@ import {
   faShareAlt,
   faComment
 } from '@fortawesome/free-solid-svg-icons';
+import Routes from './routes';
 
 library.add(faSearch);
 library.add(faSpinner);
@@ -27,14 +26,13 @@ library.add(faShareAlt);
 library.add(faComment);
 library.add(faArrowsAltV);
 
-// react-toastify config
-// import { style } from 'react-toastify'
-// style({
-//   colorSuccess: 'verde',
-// })
+ReactDOM.render(
+    <React.Fragment>
+        <GlobalStyle /><Routes />
+    </React.Fragment>
+    , document.getElementById('root'));
 
-render(
-      <Routes />,
-  document.getElementById('root')
-)
-registerServiceWorker()
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
