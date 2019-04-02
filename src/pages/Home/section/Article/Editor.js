@@ -22,6 +22,11 @@ export default class Editor extends Component {
     this.model = ''
   }
 
+  componentDidMount() {
+    this.saveModel()
+    setInterval(this.saveModel, 20000);
+  }
+
   handleModelChange = (model) => {
     this.model = model;
   }
@@ -32,6 +37,7 @@ export default class Editor extends Component {
       model: this.model
     })
   }
+
   render() {
     return (
       <Fragment>

@@ -15,7 +15,7 @@ const PDACell = ({url=''}) => {
 
     const apiPDA = async (url) => {
         await axios({
-            url: 'http://server.borjamediavilla.com/api/moz',
+            url: 'http://backend.borjamediavilla.com/api/v1/serp/moz',
             method: 'post',
             data: { url },
             crossdomain: true

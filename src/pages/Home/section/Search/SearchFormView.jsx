@@ -9,6 +9,7 @@ const SearchFormView = ({
     setKeywords,
     submitQuery,
     keywords,
+    lang,
     languages = [] }) => {
     return (
         <Row>
@@ -38,6 +39,7 @@ const SearchFormView = ({
                 <Autocomplete
                     suggestions={languages.map(lang => lang.flag + lang.text)}
                     placeholder={'🇧🇴Bolivia / Spanish (Latin America) - Español (Latinoamérica)'}
+                    value={lang==='🇧🇴 Bolivia / Spanish (Latin America) - Español (Latinoamérica)'?null:lang}
                     setLanguages={setLanguages}
                 />
             </Column>

@@ -15,10 +15,10 @@ const SearchForm = () => {
         axios.get('http://api.ipify.org', {
         })
             .then((res) => {
-                const ip = res.data
+                const ip = res.data;
                 axios({
                     method: 'post',
-                    url: `http://server.borjamediavilla.com/api/localLang`,
+                    url: `http://backend.borjamediavilla.com/api/v1/serp/localLang`,
                     data: { ip },
                     crossdomain: true
                 })

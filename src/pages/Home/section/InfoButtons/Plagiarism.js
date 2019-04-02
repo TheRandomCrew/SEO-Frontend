@@ -20,14 +20,13 @@ const Plagiarism = () => {
             const data = { texto: text }
             axios({
                 method: 'post',
-                url: `http://server.borjamediavilla.com/api/verificarTextoAux`,
+                url: `http://backend.borjamediavilla.com/api/v1/serp/verificarTextoAux`,
                 data,
                 crossdomain: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then((resp) => {
-                console.log(resp.data)
                 const { success, status, message } = resp.data;
                 if (success === true) {
                     if (status === 1) {
@@ -50,8 +49,6 @@ const Plagiarism = () => {
         }
     }
 
-    console.log(plagiarism)
-
     return (
         <div className="tooltip">
             <Button
@@ -65,6 +62,7 @@ const Plagiarism = () => {
 
             {loading && <p>Esto podría demorar unos minutos, por favor espere..</p>}
 
+            {plagiarism!==[] && <p hidden>Hay otros sitios o documentos ocupando ese texto</p>}
             <span className="tooltiptext">
                 Verificar si el texto es plagiado
             </span>

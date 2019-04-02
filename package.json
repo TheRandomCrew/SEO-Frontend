@@ -1,6 +1,6 @@
 {
   "name": "serp-keywords-tools",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "author": "Israel-Laguan <https://github.com/Israel-Laguan>,Luis <https://github.com/luis-rp>",
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "styled-components": "^4.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

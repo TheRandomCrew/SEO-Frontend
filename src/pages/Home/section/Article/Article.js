@@ -27,6 +27,7 @@ const Article = () => {
                 case 'textHtml':
                     setText(h2p(value));
                     setTextHtml(value)
+                    saveArticle()
                     break;
                 default:
                     console.error('the key given is not in this castle')
@@ -35,7 +36,7 @@ const Article = () => {
         }
     }
 
-    const saveArticle = () => { // TODO: Move up
+    const saveArticle = () => { 
         const newArticle = { title, meta, text, textHtml }
         setPair('article', newArticle);
     }

@@ -29,6 +29,12 @@ class Autocomplete extends Component {
     };
   }
 
+  componentDidUpdate(prevProps){
+    if(this.props.value && prevProps.value!==this.props.value){
+      this.setState({userInput:this.props.value})
+    }
+  }
+
   // Event fired when the input value is changed
   onChange = e => {
     const { suggestions } = this.props;
@@ -69,7 +75,7 @@ class Autocomplete extends Component {
     // User pressed the enter key, update the input and close the
     // suggestions
     if (e.keyCode === 13) {
-      this.props.setLanguages(e.currentTarget.innerText)
+      this.props.setLanguages(filteredSuggestions[activeSuggestion])
       this.setState({
         activeSuggestion: 0,
         showSuggestions: false,

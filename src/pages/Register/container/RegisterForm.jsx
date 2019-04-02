@@ -6,19 +6,27 @@ import {
     Button
 } from '../style/componentsStyle';
 
-const LoginForm = ({onSubmit}) => {
+const RegisterForm = ({onSubmit}) => {
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
     const Submit = (e) => {
         e.preventDefault();
-        onSubmit(email, password)
+        onSubmit(name, email, password)
     }
   return (
     <ParentForm onSubmit={Submit}>
                 <HeaderForm>
                     <p>Ingrese sus credenciales para entrar:</p>
                 </HeaderForm>
+                <InputDiv
+                    id={'name'}
+                    type={'text'}
+                    placeHolder={'Ingrese nombre de usuario'}
+                    value={name}
+                    onChange={setName}
+                />
                 <InputDiv
                     id={'email'}
                     type={'text'}
@@ -59,4 +67,4 @@ const InputDiv = ({id, type, placeHolder, onChange}) => {
     )
 }
 
-export default LoginForm
+export default RegisterForm

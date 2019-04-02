@@ -17,6 +17,9 @@ const Readability = () => {
             console.log('set editor first and save article')
         }
     }
+    React.useEffect(()=> {
+        checkReadability()
+    }, [text])
     return (
         <div className="tooltip">
             <RoundedButton

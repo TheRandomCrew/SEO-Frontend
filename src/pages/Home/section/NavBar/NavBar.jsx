@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-// import tokenService from '../../../token'
-import {  links } from '../../../Routes' // history,
+import tokenService from '../../../token'
+import { history, links } from '../../../Routes' // 
 
 const NavBar = ({ logo }) => {
-    // const logout = () => {
-    //     tokenService.delete()
-    //     history.replace('/login')
-    // }
+    const logout = () => {
+        tokenService.delete()
+        history.replace('/login')
+    }
     return (
         <Nav>
             <NavLink
@@ -35,7 +35,7 @@ const NavBar = ({ logo }) => {
                     </NavLink>
                 )
             })}
-            {/* <Button onClick={logout}>Salir</Button> */}
+            <Button onClick={logout}>Salir</Button>
         </Nav>
     )
 }
@@ -57,12 +57,12 @@ const Link = styled.span`
     padding: 14px 16px;
     text-decoration: none;
 `
-// const Button = styled.button`
-//     background: #9954BB;
-//     color: #fff;
-//     text-align: center;
-//     padding: 14px 16px;
-//     text-decoration: none;
-//     position: absolute;
-//     right: 0px;
-// `
+const Button = styled.button`
+    background: #9954BB;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    position: absolute;
+    right: 0px;
+`

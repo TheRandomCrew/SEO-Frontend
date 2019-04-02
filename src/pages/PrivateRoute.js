@@ -12,7 +12,7 @@ function PrivateRoute({ component: Component, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: '/inscribete',
               state: { from: props.location },
             }}
           />

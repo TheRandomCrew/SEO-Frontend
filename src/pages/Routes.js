@@ -1,11 +1,12 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import createHistory from 'history/createBrowserHistory'
-// import PrivateRoute from './PrivateRoute';
-// import { Login } from './Login';
+import {createBrowserHistory} from 'history'
+import PrivateRoute from './PrivateRoute';
+import { Login } from './Login';
 import {Home} from './Home';
-export const history = createHistory()
+import { Signup } from './Register';
+export const history = createBrowserHistory()
 
 function Routes() {
   return (
@@ -13,9 +14,9 @@ function Routes() {
       <Container>
         <Content>
           <Switch>
-            <Route exact={true} path={'/'} component={Home} />
-            {/* <Route exact={true} path={'/login'} component={Login} /> */}
-            {/* <PrivateRoute exact={false} path={'/'} component={Home} /> */}
+            <Route exact={true} path={'/inscribete'} component={Signup} />
+            <Route exact={true} path={'/entra'} component={Login} /> 
+            <PrivateRoute exact={false} path={'/'} component={Home} />
           </Switch>
         </Content>
       </Container>

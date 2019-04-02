@@ -71,7 +71,7 @@ export default class SEO extends Component {
         this.rankedAPI(data);
         await axios({ // TODO: move axios calls to services/, also create new api
             method: 'post',
-            url: `http://server.borjamediavilla.com/api/serp`,
+            url: `http://backend.borjamediavilla.com/api/v1/serp/serp`,
             data,
             crossdomain: true
         })
@@ -144,9 +144,10 @@ export default class SEO extends Component {
         const {
             minVolume, maxVolume, minAdwords, maxAdwords, minCPC, maxCPC, filterKeys, eraseKeys
         } = filter
-        let newKeywd = []
+        let newKeywd = [], top20=[];
+        top20=APIDATA.filter((_item, id)=>id<20)
         // eslint-disable-next-line
-        APIDATA.map(keywords => {
+        top20.map(keywords => {
             if ((keywords.search_volume >= minVolume && keywords.search_volume <= maxVolume) &&
                 (Math.floor((keywords.cpc + 0.01) * 100) / 100 >= minCPC &&
                     Math.floor((keywords.cpc + 0.01) * 100) / 100 <= maxCPC) &&
@@ -194,7 +195,7 @@ export default class SEO extends Component {
         console.log('ranked api call started')
         await axios({
             method: 'post',
-            url: `http://server.borjamediavilla.com/api/ranked`,
+            url: `http://backend.borjamediavilla.com/api/v1/serp/ranked`,
             data,
             crossdomain: true
         })
@@ -261,7 +262,6 @@ export default class SEO extends Component {
             this.setState({ showTables: true })
             this.serpAPI(value)
         }
-        console.log(key)
         this.setState({ [key]: value })
     }
 }
