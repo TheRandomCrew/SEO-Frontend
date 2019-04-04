@@ -8,14 +8,12 @@ import DnD from '../../DnD';
 const ArticleView = ({
     set,
     saveArticle,
-    saveTitle,
-    saveMeta,
     title,
     meta,
-    // text
+    text
 }) => {
-    const { state: { DnDTitleItems, DnDMetaItems } } = React.useContext(DnDContext);
-    const { state: { article: { text } } } = React.useContext(SEOContext);
+    const { state: { DnDTitleItems, DnDMetaItems, DnDEditorItems } } = React.useContext(DnDContext);
+    // const { state: { article: { text } } } = React.useContext(SEOContext);
 
     const WordCount = (s) => {
         return s.split(' ')
@@ -35,9 +33,6 @@ const ArticleView = ({
                         onChange={e => set('title', e.target.value)}
                         value={title}
                     />
-                    <button onClick={() => saveTitle()}>
-                        Agregar Tags
-                    </button>
                 </DnD>
             </Row>
             <Row>
@@ -50,16 +45,19 @@ const ArticleView = ({
                         onChange={e => set("meta", e.target.value)}
                         value={meta}
                     />
-                    <button onClick={() => saveMeta()}>
-                        Agregar Tags
-                    </button>
                 </DnD>
             </Row>
             <Row>
                 <ClearFix>
-                    <Editor
-                        set={set}
-                    />
+                    <DnD
+                        items={DnDEditorItems}
+                        droppableId="editor"
+                    >
+                        <Editor
+                            set={set}
+                            text={text}
+                        />
+                    </DnD>
                     <button onClick={() => saveArticle()}>
                         Save
                     </button>

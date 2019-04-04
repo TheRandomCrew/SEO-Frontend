@@ -38,17 +38,23 @@ export default class Editor extends Component {
     })
   }
 
+  componentDidUpdate(prevProps) { // this.model is the true storage
+    if (prevProps.text !== this.props.text) {
+      console.log('updated', this.props.text);
+      this.props.set('textHtml', this.props.text);
+      this.model = this.props.text;
+      this.setState({ model: this.props.text })
+    }
+  }
+
   render() {
     return (
       <Fragment>
         <FroalaEditor
-          model={this.state.model} 
-          onModelChange={this.handleModelChange} 
+          model={this.state.model}
+          onModelChange={this.handleModelChange}
           config={this.config}
         />
-        <button onClick={() => this.saveModel()}>
-          Guardar Texto
-        </button>
       </Fragment>
     )
   }

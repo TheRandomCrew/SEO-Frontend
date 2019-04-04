@@ -4,8 +4,11 @@ import { Redirect, Link } from 'react-router-dom'
 import tokenService from '../token'
 import { history } from '../Routes'
 import LoginForm from './container/LoginForm';
+import globalContext from '../globalContext'
 
 const Login = () => {
+    const { actions: { setUserID } } = React.useContext(globalContext);
+
     const login = (email, password) => {
         axios({
             url: 'http://backend.borjamediavilla.com/api/v1/auth/login',
@@ -17,8 +20,8 @@ const Login = () => {
                 if (res.status === 200) {
                     const { success } = res.data;
                     tokenService.set(success[0].token)
-                    console.log( success[0].msg)
-                    history.replace('/')
+                    setUserID(success[0]._id)
+                    history.replace(`/${success[0]._id}`)
                 } else {
                     console.log(res)
                     const error = new Error(res.errors);
@@ -32,15 +35,15 @@ const Login = () => {
         login(email, password)
     };
 
-    
+
     return tokenService.get() ? (
         <Redirect to="/" />
-    ) :  (
-        <React.Fragment>
-            <LoginForm onSubmit={onSubmit} />
-            <Link to='/inscribete'>Inscibete</Link>
-        </React.Fragment>
-    )
+    ) : (
+            <React.Fragment>
+                <LoginForm onSubmit={onSubmit} />
+                <Link to='/inscribete'>Inscibete</Link>
+            </React.Fragment>
+        )
 }
 
 export default Login;

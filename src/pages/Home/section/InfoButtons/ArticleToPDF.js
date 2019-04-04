@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { SEOContext } from '../../store';
+import React, { useState, useContext } from 'react';
+import { SEOContext, DnDContext } from '../../store';
 import { Button } from './style/ArticleStyle';
 import './style/ToolTip.css';
 
@@ -7,8 +7,8 @@ const ArticleToPDF = () => {
     const [pdf, setPdf] = useState('')
     const [loading, setLoading] = useState(false);
 
-    const { state: { article:{textHtml} } } = React.useContext(SEOContext)
-
+    const { state: { article: { textHtml } } } = useContext(SEOContext)
+    const { state: { DnDTitleItems, DnDMetaItems } } = useContext(DnDContext);
     const convertHtmlToPdf = (html) => {
         fetch('https://v2018.api2pdf.com/chrome/html', {
             method: 'post',
@@ -22,35 +22,42 @@ const ArticleToPDF = () => {
             .then(res => {
                 setLoading(false)
                 setPdf(res.pdf)
-            }
-            );
+            })
+            .catch(e=>{
+                console.error(e)
+                setLoading(false)
+            })
     }
 
-    const generatePDF=() => {
+    const generatePDF = () => {
         // TODO: Mix here title, meta, text and tables
-        if (textHtml!==''){   
-            convertHtmlToPdf(textHtml)
+        setLoading(true)
+        if (textHtml !== '' && DnDMetaItems.length > 0) {
+            const titleHtml = DnDTitleItems.map(item=>item.key).join(' ');
+            const metaHtml = DnDMetaItems.map(item=>item.key).join(' ');
+            convertHtmlToPdf(`<h1>${titleHtml}</h1><br/><span>${metaHtml}</span><br/>` + textHtml)
         }
-        else{
+        else {
             console.log('set editor text first and save article')
         }
     }
+
     return (
         <div className="tooltip">
             <Button
                 onClick={() => generatePDF()}
             >
                 {loading ? (
-            <p>Generando...</p>
-          ) : (
-            <p>
-              Generar PDF <br />
-              <span style={{ fontSize: "12px" }}>
-                {" "}
-                para Descargar Articulo{" "}
-              </span>
-            </p>
-          )}
+                    <p>Generando...</p>
+                ) : (
+                        <p>
+                            Generar PDF <br />
+                            <span style={{ fontSize: "12px" }}>
+                                {" "}
+                                para Descargar Articulo{" "}
+                            </span>
+                        </p>
+                    )}
             </Button>
             <span>
                 {pdf && <a
