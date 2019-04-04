@@ -1,18 +1,37 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import h2p from 'html2plaintext'
 import ArticleView from './ArticleView'
-import {SEOContext, DnDContext} from '../../store'
+import { SEOContext, DnDContext } from '../../store'
 
 
 const Article = () => {
     const [title, setTitle] = useState('');
     const [meta, setMeta] = useState('');
     const [text, setText] = useState('');
+    const [IsLastUpdatedEditor, setIsLastUpdatedEditor] = useState(true);
     const [textHtml, setTextHtml] = useState('');
 
-    const { actions: { addKeyword } } = useContext(DnDContext);
+    const { state:
+        { DnDTitleItems, DnDMetaItems, DnDEditorItems }
+    } = useContext(DnDContext);
 
     const { actions: { setPair } } = useContext(SEOContext);
+
+    useEffect(() => {
+        const DnDTitle = DnDTitleItems.map(item => item.key).join(' ');
+        setTitle(title + DnDTitle)
+    }, [DnDTitleItems])
+
+    useEffect(() => {
+        const DnDMeta = DnDMetaItems.map(item => item.key).join(' ');
+        setMeta(meta + DnDMeta)
+    }, [DnDMetaItems])
+
+    useEffect(() => {
+        const DnDText = DnDEditorItems.map(item => item.key).join(' ');
+        setText(text + ' ' + DnDText) // what about textHtml
+        setIsLastUpdatedEditor(false)
+    }, [DnDEditorItems])
 
     const set = (key, value) => {
         // TODO: add some sanityzing to value
@@ -25,8 +44,11 @@ const Article = () => {
                     setMeta(value)
                     break;
                 case 'textHtml':
-                    setText(h2p(value));
-                    setTextHtml(value)
+                    if (IsLastUpdatedEditor) {
+                        setText(h2p(value));
+                        setTextHtml(value);
+                    }
+                    setIsLastUpdatedEditor(true)
                     saveArticle()
                     break;
                 default:
@@ -36,42 +58,14 @@ const Article = () => {
         }
     }
 
-    const saveArticle = () => { 
+    const saveArticle = () => {
         const newArticle = { title, meta, text, textHtml }
         setPair('article', newArticle);
-    }
-
-    const saveTitle = () => {
-        let array = title.split(',').map((item, id) => { //TODO: change items view 'cause is a title not tags
-            return ({ key: item, id: item + id })
-        })
-        addKeyword('title', array);
-        setTitle('')
-    }
-
-    const saveMeta = () => {
-        let array = meta.split(',').map((item, id) => {
-            return ({ key: item, id: item + id })
-        })
-        addKeyword('meta', array)
-        setMeta('')
-    }
-
-    const saveText = () => {
-        let array = text.split(',').map((item, id) => { //TODO: change items view 'cause is a title not tags
-            return ({ key: item, id: item + id })
-        })
-        addKeyword('text', array.join())
-        setText('');
-        setTextHtml('')
     }
 
     return (
         <ArticleView
             set={set}
-            saveTitle={saveTitle}
-            saveMeta={saveMeta}
-            saveText={saveText}
             saveArticle={saveArticle}
             title={title}               // internal to be updated with DnD
             meta={meta}                 // meta to be submitted after updated with DnD

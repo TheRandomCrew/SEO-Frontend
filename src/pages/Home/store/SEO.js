@@ -62,13 +62,13 @@ export default class SEO extends Component {
     setPair = (key, value = { keywords: '' }) => {
         if (key === 'query') {
             this.serpAPI(value);
-            this.rankedAPI(value);
+            // this.rankedAPI(value);
         }
         this.setState({ [key]: value })
     }
 
     serpAPI = async (data = { keywords: '', select: '' }) => {
-        this.rankedAPI(data);
+        // this.rankedAPI(data);
         await axios({ // TODO: move axios calls to services/, also create new api
             method: 'post',
             url: `http://backend.borjamediavilla.com/api/v1/serp/serp`,

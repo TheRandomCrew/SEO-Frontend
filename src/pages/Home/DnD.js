@@ -81,7 +81,7 @@ const DnD = ({ items, droppableId, children = undefined }) => {
                                                     )}
 
                                                 >
-                                                    <span size='large'
+                                                    <span size='large' hidden
                                                         style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
                                                     >{item.key}
                                                     </span>
@@ -103,7 +103,7 @@ const DnD = ({ items, droppableId, children = undefined }) => {
                                                     )}
 
                                                 >
-                                                    <span size='large'
+                                                    <span size='large' hidden
                                                         style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
                                                     >{item.key}
                                                     </span>
@@ -112,7 +112,7 @@ const DnD = ({ items, droppableId, children = undefined }) => {
                                             </div>
                                         )
                                     }
-                                    case 'text': {
+                                    case 'editor': {
                                         return (
                                             <div>
                                                 <div
@@ -125,7 +125,7 @@ const DnD = ({ items, droppableId, children = undefined }) => {
                                                     )}
 
                                                 >
-                                                    <span size='large'
+                                                    <span size='large' hidden
                                                         style={{ color: snapshot.isDragging ? 'green' : (item.words ? 'orange' : 'red') }}
                                                     >{item.key}
                                                     </span>

@@ -1,6 +1,6 @@
 {
   "name": "serp-keywords-tools",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "author": "Israel-Laguan <https://github.com/Israel-Laguan>,Luis <https://github.com/luis-rp>",
   "private": true,
   "dependencies": {

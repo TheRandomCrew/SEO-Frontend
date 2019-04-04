@@ -1,22 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import globalContext from './globalContext';
 
-const globalStore = ({children=undefined}) => {
-    const [theme, setTheme] = useState('light')
+const { Provider } = globalContext;
+
+const GlobalStore = ({ children = undefined }) => {
+  const [theme, setTheme] = useState('light')
+  const [userID, setUserID] = useState('1')
   return (
-    <globalContext.Provider
-    value={{
+    <Provider
+      value={{
         state: {
-            theme
+          theme,
+          userID
         },
         actions: {
-            setTheme
+          setTheme,
+          setUserID
         }
-    }}
+      }}
     >
       {children}
-    </globalContext.Provider>
+    </Provider>
   )
 }
 
-export default globalStore
+export default GlobalStore
