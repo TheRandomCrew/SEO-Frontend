@@ -5,33 +5,30 @@ import { SEOContext, DnDContext } from '../../store'
 
 
 const Article = () => {
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState("");
     const [meta, setMeta] = useState('');
     const [text, setText] = useState('');
     const [IsLastUpdatedEditor, setIsLastUpdatedEditor] = useState(true);
     const [textHtml, setTextHtml] = useState('');
 
     const { state:
-        { DnDTitleItems, DnDMetaItems, DnDEditorItems }
+        { DnDTitle, DnDMeta, DnDEditor }
     } = useContext(DnDContext);
 
     const { actions: { setPair } } = useContext(SEOContext);
 
-    useEffect(() => {
-        const DnDTitle = DnDTitleItems.map(item => item.key).join(' ');
-        setTitle(title + DnDTitle)
-    }, [DnDTitleItems])
+    useEffect(()=>{
+        setTitle(title + ' ' + DnDTitle)
+    },[DnDTitle])
 
     useEffect(() => {
-        const DnDMeta = DnDMetaItems.map(item => item.key).join(' ');
-        setMeta(meta + DnDMeta)
-    }, [DnDMetaItems])
+        setMeta(meta + ' ' + DnDMeta)
+    }, [DnDMeta])
 
     useEffect(() => {
-        const DnDText = DnDEditorItems.map(item => item.key).join(' ');
-        setText(text + ' ' + DnDText) // what about textHtml
+        setText(text + ' ' + DnDEditor) // what about textHtml
         setIsLastUpdatedEditor(false)
-    }, [DnDEditorItems])
+    }, [DnDEditor])
 
     const set = (key, value) => {
         // TODO: add some sanityzing to value
@@ -69,7 +66,7 @@ const Article = () => {
             saveArticle={saveArticle}
             title={title}               // internal to be updated with DnD
             meta={meta}                 // meta to be submitted after updated with DnD
-            text={text}                 // Same as beforeDnDTitleItems={state.DnDTitleItems}
+            text={text}                 
         />
     )
 }

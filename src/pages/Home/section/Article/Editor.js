@@ -29,18 +29,21 @@ export default class Editor extends Component {
 
   handleModelChange = (model) => {
     this.model = model;
+    this.setState({
+      model: model
+    })
   }
 
   saveModel = () => {
     this.props.set('textHtml', this.model)
+    this.props.saveArticle()
     this.setState({
       model: this.model
     })
   }
 
   componentDidUpdate(prevProps) { // this.model is the true storage
-    if (prevProps.text !== this.props.text) {
-      console.log('updated', this.props.text);
+    if (prevProps.text !== this.props.text && this.props.text!=='') {
       this.props.set('textHtml', this.props.text);
       this.model = this.props.text;
       this.setState({ model: this.props.text })
@@ -55,6 +58,9 @@ export default class Editor extends Component {
           onModelChange={this.handleModelChange}
           config={this.config}
         />
+        <button onClick={() => this.saveModel()}>
+            Save
+        </button>
       </Fragment>
     )
   }

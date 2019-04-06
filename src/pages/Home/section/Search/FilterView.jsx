@@ -202,6 +202,9 @@ const FilterView = ({
 export default FilterView;
 
 const InputRange = styled(InputText)`
+    font-family: "kotori_rosebold";
+    font-size: 20px;
+    padding: 0;
     width: 80%;
     &:hover {
     box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);

@@ -1,4 +1,4 @@
-export { default as Analysis } from './Analysis/Analysis';
+export { default as Analysis } from './Analysis';
 export { default as Article } from './Article/Article';
 export { default as Footer } from './Footer/Footer';
 export { default as InfoButtons } from './InfoButtons/InfoButtons';

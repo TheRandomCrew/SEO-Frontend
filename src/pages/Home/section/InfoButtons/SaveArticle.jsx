@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
-import { SEOContext, DnDContext } from '../../store';
+import { SEOContext } from '../../store';
 import { Button } from './style/ArticleStyle';
 import './style/ToolTip.css'
 import globalContext from '../../../globalContext';
 
 const SaveArticle = () => {
 
-    const { state: { article: { text } } } = useContext(SEOContext)
-    const { state: { DnDTitleItems, DnDMetaItems } } = useContext(DnDContext);
+    const { state: { article: { title, meta, text } } } = useContext(SEOContext);
     const { state: { userID } } = useContext(globalContext)
     const saveArticleDB = () => {
         axios({
@@ -17,9 +16,9 @@ const SaveArticle = () => {
             crossdomain: true,
             data: {
                 lastArticle: {
-                    title: DnDTitleItems.map(item => item.key).join(' '),
-                    meta: DnDMetaItems.map(item => item.key).join(' '),
-                    text
+                    title,
+                    meta,
+                    text 
                 }
             }
         })

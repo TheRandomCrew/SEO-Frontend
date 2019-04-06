@@ -1,6 +1,6 @@
 {
   "name": "serp-keywords-tools",
-  "version": "3.8.0",
+  "version": "3.9.1",
   "author": "Israel-Laguan <https://github.com/Israel-Laguan>,Luis <https://github.com/luis-rp>",
   "private": true,
   "dependencies": {
@@ -18,7 +18,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "readability-meter": "^1.0.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "styled-components-grid": "^2.2.2"
   },
   "scripts": {
     "start": "PORT=3000 react-scripts start",

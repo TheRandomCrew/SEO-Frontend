@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Row } from '../../style/GridStyles';
-import { SEOContext, DnDContext } from '../../store';
 import Editor from './Editor';
 import DnD from '../../DnD';
 
@@ -12,22 +11,21 @@ const ArticleView = ({
     meta,
     text
 }) => {
-    const { state: { DnDTitleItems, DnDMetaItems, DnDEditorItems } } = React.useContext(DnDContext);
-    // const { state: { article: { text } } } = React.useContext(SEOContext);
 
     const WordCount = (s) => {
-        return s.split(' ')
+        return s.split(' ') 
             .filter(function (n) { return n !== '' })
             .length;
     }
 
     return (
-        <>
+        <div>
             <Row>
                 <DnD
-                    items={DnDTitleItems}
+                    items={[]}
                     droppableId='title'
                 >
+                <br/>
                     <InputText
                         placeholder="Escribe el Titulo SEO"
                         onChange={e => set('title', e.target.value)}
@@ -37,7 +35,7 @@ const ArticleView = ({
             </Row>
             <Row>
                 <DnD
-                    items={DnDMetaItems}
+                    items={[]}
                     droppableId="meta"
                 >
                     <TextArea
@@ -50,36 +48,36 @@ const ArticleView = ({
             <Row>
                 <ClearFix>
                     <DnD
-                        items={DnDEditorItems}
+                        items={[]}
                         droppableId="editor"
                     >
                         <Editor
                             set={set}
                             text={text}
+                            saveArticle={saveArticle}
                         />
                     </DnD>
-                    <button onClick={() => saveArticle()}>
-                        Save
-                    </button>
                 </ClearFix>
             </Row>
             <Row>
                 <span>Numero de Palabras {WordCount(text)}</span>
             </Row>
-            <Row>
+            {/* <Row>
                 <span>Palabras Claves Anadidas {DnDMetaItems.filter(i => i !== '').length}</span>
-            </Row>
-        </>
+            </Row> */}
+        </div>
     )
 }
 
 export default ArticleView;
 
 const ClearFix = styled.div`
-    overflow: auto;
+    overflow: auto; 
+    width: 100%;
 `;
 
 const InputText = styled.input`
+ width: 90%;
   border: 1px solid #999;
   padding: 0.5rem;
   margin-bottom: 3px;

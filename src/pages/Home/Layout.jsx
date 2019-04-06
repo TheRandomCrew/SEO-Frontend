@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, Row, Column, Main, ExpandButton, RowCenter, Bordered } from './style/GridStyles';
+import Grid from 'styled-components-grid';
+import { Main, ExpandButton, Bordered } from './style/GridStyles';
 import { SEOContextProvider } from './store';
 import { NavBar, Search, Tables, Article, InfoButtons, Analysis, Footer } from './section';
 
@@ -9,7 +10,7 @@ const Layout = () => {
         <>
             <NavBar />
             <Main>
-                <RowCenter>
+                <Grid halign="center">
                     <ExpandButton onClick={() => setHideSEO(!hideSEO)}>
                         {hideSEO ? (
                             <p style={{ fontSize: "15px", margin: "5px" }}>
@@ -21,32 +22,30 @@ const Layout = () => {
                             </p>
                             )}
                     </ExpandButton>
-                </RowCenter>
+                </Grid>
                 <SEOContextProvider>
-                    <Grid>
-                        <Column md={5} hidden={hideSEO}>
+                    <Grid halign="center">
+                        <Grid.Unit size={{ mobile: 1, tablet: 0.81, desktop: 0.3 }} hidden={hideSEO}>
                             <Bordered>
                                 <Search />
                                 <Tables />
                             </Bordered>
-                        </Column>
-                        <Column>
+                        </Grid.Unit>
+                        <Grid.Unit size={{ mobile: 1, tablet: 0.81, desktop: !hideSEO?0.7:1 }}>
                             <Bordered>
                                 <Grid>
-                                    <Row>
-                                        <Column sm={12} md={10} lg={10}>
-                                            <Article />
-                                        </Column>
-                                        <Column sm={12} md={2} lg={2}>
-                                            <InfoButtons />
-                                        </Column>
-                                    </Row>
+                                    <Grid.Unit size={{ mobile: 1, tablet: 0.81, desktop: hideSEO?0.9:0.8 }}>
+                                        <Article />
+                                    </Grid.Unit>
+                                    <Grid.Unit size={{ mobile: 1, tablet: 0.8, desktop: hideSEO?0.1:0.2 }}>
+                                        <InfoButtons />
+                                    </Grid.Unit>
                                 </Grid>
                                 <Bordered>
                                     <Analysis />
                                 </Bordered>
                             </Bordered>
-                        </Column>
+                        </Grid.Unit>
                     </Grid>
                 </SEOContextProvider>
             </Main>

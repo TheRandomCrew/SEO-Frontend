@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { reorder, move, moveAndReorder } from '../util/DND';
+import { reorder } from '../util/DND';
 import DnDContext from './DnDContext';
 
 const { Provider } = DnDContext
@@ -10,8 +10,10 @@ export default class DnD extends Component {
         DnDTableItems: [{ key: '-', volume: 0, cpc: 0, competencia: 0, id: '0' }],
         DnDTitleItems: [],
         DnDMetaItems: [],
-        DnDEditorItems: [], // TODO: make multidrop viable in Editor
-        DnDTargetID: '' // show what Draggable just received an item
+        DnDEditorItems: [],
+        DnDTitle:'',
+        DnDMeta:'',
+        DnDEditor:''
     };
 
     render() {
@@ -39,32 +41,7 @@ export default class DnD extends Component {
     componentDidUpdate(prevProps) {
         const { serpData } = this.props
         if (serpData !== prevProps.serpData) {
-            console.log('serpData Changed')
             this.setState({ ...this.state, DnDTableItems: serpData })
-        }
-    }
-
-    addKeyword = (key, array) => {
-        switch (key) {
-            case 'title':
-                { // TODO: check this solution: console.log([...new Set([...array1, ...array2])]);  https://www.peterbe.com/plog/merge-two-arrays-without-duplicates-in-javascript
-                    this.setState({ DnDTitleItems: this.state.DnDTitleItems.concat(array) })
-                    break;
-                }
-            case 'meta':
-                {
-                    this.setState({ DnDMetaItems: this.state.DnDMetaItems.concat(array) })
-                    break;
-                }
-            case 'text':
-                {
-                    this.setState({ DnDEditorItems: this.state.DnDEditorItems.concat(array) })
-                    break;
-                }
-
-            default:
-                console.log('No place for that value here')
-                break;
         }
     }
 
@@ -92,66 +69,21 @@ export default class DnD extends Component {
 
         console.log(`moving from ${sourceId} to ${destinationId}`);
 
-        let { DnDTableItems,
-            DnDTitleItems,
-            DnDMetaItems,
-            DnDEditorItems, } = this.state
+        let { DnDTableItems} = this.state
 
-        //If the place we moved the draggable out of is different from the place we moved it to, execute this
         if (sourceId !== destinationId) {
-            switch (sourceId) {
-                case 'keywords': {
-                    let sourceList = DnDTableItems;
-                    let destinationList = [];
+            let sourceList = DnDTableItems;
                     switch (destinationId) {
-                        case 'title': {
-                            destinationList = DnDTitleItems;
-                            //Note: source.index and destination.index are generated onDragEnd-
-                            //source.index is the index where the dragged item started out in the source droppable
-                            //destination.index is the index where the dragged item was placed by the user, in the destination droppable
-                            //after we pass the parameters to moveAndReorder, we will get back an array of two arrays
-                            //lists[0] will be the source droppable with the moved draggable taken out
-                            //lists[1] will be the target droppable with the moved draggable added in at the correct index
-                            let lists = move(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            // set in state/App.js the new item
-                            // this.props.setPair()
-                            this.setState({
-                                DnDTableItems: lists[0],
-                                DnDTitleItems: lists[1]
-                            })
+                        case 'title': {                            
+                            this.setState({DnDTitle: sourceList[source.index].key })
                             break;
                         }
                         case 'meta': {
-                            destinationList = DnDMetaItems;
-                            let lists = move(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDTableItems: lists[0],
-                                DnDMetaItems: lists[1]
-                            })
+                            this.setState({DnDMeta: sourceList[source.index].key })
                             break;
                         }
                         case 'editor': {
-                            destinationList = DnDEditorItems;
-                            let lists = move(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDTableItems: lists[0],
-                                DnDEditorItems: lists[1]
-                            })
+                            this.setState({DnDEditor: sourceList[source.index].key })
                             break;
                         }
                         default: {
@@ -159,171 +91,7 @@ export default class DnD extends Component {
                             break;
                         }
                     }
-                    break;
-                }
-                case 'title': {
-                    let sourceList = DnDTitleItems;
-                    let destinationList = [];
-                    switch (destinationId) {
-                        case 'keywords': {
-                            destinationList = DnDTableItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDTitleItems: lists[0],
-                                DnDTableItems: lists[1]
-                            })
-                            break;
-                        }
-                        case 'meta': {
-                            destinationList = DnDMetaItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDTitleItems: lists[0],
-                                DnDMetaItems: lists[1]
-                            })
-                            break;
-                        }
-                        case 'editor': {
-                            destinationList = DnDEditorItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDTitleItems: lists[0],
-                                DnDEditorItems: lists[1]
-                            })
-                            break;
-                        }
-                        default: {
-                            console.log('The new destinationId is not set or the name given is incorrect')
-                            break;
-                        }
-                    }
-                    break;
-                }
-                case 'meta': {
-                    let sourceList = DnDMetaItems;
-                    let destinationList = [];
-                    switch (destinationId) {
-                        case 'keywords': {
-                            destinationList = DnDTableItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDMetaItems: lists[0],
-                                DnDTableItems: lists[1]
-                            })
-                            break;
-                        }
-                        case 'title': {
-                            destinationList = DnDTitleItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDMetaItems: lists[0],
-                                DnDTitleItems: lists[1]
-                            })
-                            break;
-                        }
-                        case 'editor': {
-                            destinationList = DnDEditorItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDMetaItems: lists[0],
-                                DnDEditorItems: lists[1]
-                            })
-                            break;
-                        }
-                        default: {
-                            console.log('The new destinationId is not set or the name given is incorrect')
-                            break;
-                        }
-                    }
-                    break;
-                }
-                case 'editor': {
-                    let sourceList = DnDEditorItems;
-                    let destinationList = [];
-                    switch (destinationId) {
-                        case 'title': {
-                            destinationList = DnDTitleItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDEditorItems: lists[0],
-                                DnDTitleItems: lists[1]
-                            })
-                            break;
-                        }
-                        case 'meta': {
-                            destinationList = DnDMetaItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDEditorItems: lists[0],
-                                DnDMetaItems: lists[1]
-                            })
-                            break;
-                        }
-                        case 'keywords': {
-                            destinationList = DnDTableItems;
-                            let lists = moveAndReorder(
-                                sourceList,
-                                source.index,
-                                destinationList,
-                                destination.index
-                            );
-                            this.setState({
-                                DnDEditorItems: lists[0],
-                                DnDTableItems: lists[1]
-                            })
-                            break;
-                        }
-                        default: {
-                            console.log('The new destinationId is not set or the name given is incorrect')
-                            break;
-                        }
-                    }
-                    break;
-                }
-                default:
-                    console.error('The new destinationId is not set or the name given is incorrect')
-                    break;
-            }
+            
         } else { //If it was moved within the same list, then just reorder that list
             console.log(`Source is the same as destination`);
             console.log(`reordering ${sourceId}`);

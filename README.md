@@ -99,9 +99,9 @@ Mas de esto pronto...
 
 Este proyecto fue bootstrapped en frontend con CRA ([Create React App](https://github.com/facebook/create-react-app)).
 
-* [React Router](https://github.com/ReactTraining/react-router) - Routing Declarativo en React 
+* [![routing: react-router](https://img.shields.io/badge/routing-react--router-informational.svg)](https://github.com/ReactTraining/react-router) - Routing Declarativo en React 
 * [axios](https://github.com/axios/axios) - Librería construida con el objetivo de gestionar la programación asíncrona con promesas.
-
+* [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=yellow&colorA=db748e)](https://github.com/styled-components/styled-components)
 <!-- ## Contribuciones
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.

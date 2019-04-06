@@ -25,10 +25,10 @@ export const Column = styled.div`
     @media only screen and (min-width: 768px) {
         ${({ sm }) => (sm && getWidthStrings(sm) )};
     }
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 992px) {
         ${({ md }) => (md && getWidthStrings(md) )};
     }
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 1200px) {
         ${({ lg }) => (lg && getWidthStrings(lg) )};
     }
 `

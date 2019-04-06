@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { SEOContext, DnDContext } from '../../store';
+import { SEOContext } from '../../store';
 import { Button } from './style/ArticleStyle';
 import './style/ToolTip.css';
 
@@ -7,8 +7,7 @@ const ArticleToPDF = () => {
     const [pdf, setPdf] = useState('')
     const [loading, setLoading] = useState(false);
 
-    const { state: { article: { textHtml } } } = useContext(SEOContext)
-    const { state: { DnDTitleItems, DnDMetaItems } } = useContext(DnDContext);
+    const { state: { article: { title, meta, textHtml } } } = useContext(SEOContext);
     const convertHtmlToPdf = (html) => {
         fetch('https://v2018.api2pdf.com/chrome/html', {
             method: 'post',
@@ -32,10 +31,8 @@ const ArticleToPDF = () => {
     const generatePDF = () => {
         // TODO: Mix here title, meta, text and tables
         setLoading(true)
-        if (textHtml !== '' && DnDMetaItems.length > 0) {
-            const titleHtml = DnDTitleItems.map(item=>item.key).join(' ');
-            const metaHtml = DnDMetaItems.map(item=>item.key).join(' ');
-            convertHtmlToPdf(`<h1>${titleHtml}</h1><br/><span>${metaHtml}</span><br/>` + textHtml)
+        if (textHtml !== '') {
+            convertHtmlToPdf(`<h1>${title}</h1><br/><span>${meta}</span><br/>` + textHtml)
         }
         else {
             console.log('set editor text first and save article')

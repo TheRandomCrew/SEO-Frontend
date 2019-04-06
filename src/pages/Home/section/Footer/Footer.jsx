@@ -15,9 +15,9 @@ const StyledFooter = styled.footer`
     float: left;
     text-align: right;
     position: fixed;
-    bottom: 5px;
+    bottom: 0px;
     width: 100%;
-    height: 35px;
+    height: 5vh;
     line-height: 35px;
     background-color: #f5f5f5;
 `

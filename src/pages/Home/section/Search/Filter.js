@@ -3,6 +3,8 @@ import FilterView from './FilterView'
 import { SEOContext } from '../../store';
 
 const Filter = ({setHide}) => {
+    const {actions:{setPair}} = React.useContext(SEOContext);
+
     const [minVolume, setMinVolume] = useState(0);
     const [maxVolume, setMaxVolume] = useState(1000000);
     const [minAdwords, setMinAdwords] = useState(0);
@@ -13,7 +15,6 @@ const Filter = ({setHide}) => {
     const [eraseKeys, setEraseKeys] = useState('');
     const [edited, setEdited] = useState(false);
 
-    const {state:{setPair}} = React.useContext(SEOContext);
 
     const applyFilter = (filter) => {
         setPair('filter',filter);

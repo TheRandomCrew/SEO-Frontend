@@ -1,6 +1,5 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
-import styled from 'styled-components'
 import { createBrowserHistory } from 'history'
 import PrivateRoute from './PrivateRoute';
 import { Login } from './Login';
@@ -12,18 +11,15 @@ export const history = createBrowserHistory()
 function Routes() {
   return (
     <Router history={history}>
-      <Container>
-        <Content>
-          <GlobalStore>
-            <Switch>
-              <Route exact={true} path={'/inscribete'} component={Signup} />
-              <Route exact={true} path={'/entra'} component={Login} />
-              <PrivateRoute exact={false} path={'/'} component={Home} />
-              <PrivateRoute path="/:userId" component={Home} />
-            </Switch>
-          </GlobalStore>
-        </Content>
-      </Container>
+      <GlobalStore>
+        <Switch>
+          <Route exact={true} path={'/'} component={Home} />
+          <Route exact={true} path={'/inscribete'} component={Signup} />
+          <Route exact={true} path={'/entra'} component={Login} />
+          <PrivateRoute exact={false} path={'/'} component={Home} />
+          <PrivateRoute path="/:userId" component={Home} />
+        </Switch>
+      </GlobalStore>
     </Router>
   )
 }
@@ -36,15 +32,5 @@ export const links = [
   { to: '/afiliados', name: "Afiliados", id: 4 },
   { to: '/contacto', name: "Contacto", id: 5 }
 ]
-
-const Container = styled.div`
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-`
-
-const Content = styled.div`
-  flex: 1;
-`
 
 export default Routes

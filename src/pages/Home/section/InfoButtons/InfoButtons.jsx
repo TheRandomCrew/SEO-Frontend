@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row } from '../../style/GridStyles';
+import Grid from 'styled-components-grid';
 import ArticleToPDF from './ArticleToPDF';
 import SaveArticle from './SaveArticle';
 import Plagiarism from './Plagiarism';
@@ -8,23 +8,23 @@ import Readability from './Readability';
 
 const InfoButtons = () => {
   return (
-    <>
-      <Row>
+    <Grid halign="right">
+      <Grid.Unit size={{ mobile: 0.5, tablet: 0.2, desktop: 1 }}>
         <SaveArticle />
-      </Row>
-      <Row>
+      </Grid.Unit>
+      <Grid.Unit size={{ mobile: 0.5, tablet: 0.2, desktop: 1 }}>
         <ArticleToPDF />
-      </Row>
-      <Row>
+      </Grid.Unit>
+      <Grid.Unit size={{ mobile: 0.3, tablet: 0.2, desktop: 1 }}>
         <SEORank />
-      </Row>
-      <Row>
+      </Grid.Unit>
+      <Grid.Unit size={{ mobile: 0.3, tablet: 0.2, desktop: 1 }}>
         <Readability />
-      </Row>
-      <Row>
+      </Grid.Unit>
+      <Grid.Unit size={{ mobile: 0.3, tablet: 0.2, desktop: 1 }}>
         <Plagiarism />
-      </Row>
-    </>
+      </Grid.Unit>
+    </Grid>
   )
 }
 

@@ -1,5 +1,5 @@
 {
-    title: 
+    titleName: 
         {
             type: String,
             default: 'Analisis SEO'

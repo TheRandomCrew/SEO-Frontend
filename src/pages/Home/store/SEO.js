@@ -34,8 +34,8 @@ export default class SEO extends Component {
             }
         ],
         article: {
-            title: [],
-            meta: [],
+            title: '',
+            meta: '',
             text: '',
             textHtml: ''
         },
@@ -68,7 +68,7 @@ export default class SEO extends Component {
     }
 
     serpAPI = async (data = { keywords: '', select: '' }) => {
-        // this.rankedAPI(data);
+        this.rankedAPI(data);
         await axios({ // TODO: move axios calls to services/, also create new api
             method: 'post',
             url: `http://backend.borjamediavilla.com/api/v1/serp/serp`,
@@ -144,16 +144,15 @@ export default class SEO extends Component {
         const {
             minVolume, maxVolume, minAdwords, maxAdwords, minCPC, maxCPC, filterKeys, eraseKeys
         } = filter
-        let newKeywd = [], top20=[];
-        top20=APIDATA.filter((_item, id)=>id<20)
+        let newKeywd = [];
         // eslint-disable-next-line
-        top20.map(keywords => {
+        APIDATA.map(keywords => {
             if ((keywords.search_volume >= minVolume && keywords.search_volume <= maxVolume) &&
-                (Math.floor((keywords.cpc + 0.01) * 100) / 100 >= minCPC &&
-                    Math.floor((keywords.cpc + 0.01) * 100) / 100 <= maxCPC) &&
-                (Math.round(keywords.competition * 100) >= minAdwords &&
-                    Math.round(keywords.competition * 100) <= maxAdwords)) {
-
+            (Math.floor((keywords.cpc + 0.01) * 100) / 100 >= minCPC &&
+            Math.floor((keywords.cpc + 0.01) * 100) / 100 <= maxCPC) &&
+            (Math.round(keywords.competition * 100) >= minAdwords &&
+            Math.round(keywords.competition * 100) <= maxAdwords)) {
+                
                 if (eraseKeys === '') {
                     filterKeys.split('\n').forEach(element => {
                         if (keywords.key.includes(element)) {
@@ -176,7 +175,9 @@ export default class SEO extends Component {
             }
         })
 
-        let serpStats = newKeywd.map((keywords, index) => {
+        let top20=newKeywd.filter((_item, id)=>id<20)
+
+        let serpStats = top20.map((keywords, index) => {
             let comp = Math.round(keywords.competition * 100);
             if (comp === 0) { comp = 1; }
             const row = {
