@@ -8,12 +8,14 @@ const externalUrls = (textHtml = '') => {
         if (urlsNumber === 0) {
             return {
                 status: 'danger',
+                icon: 'external-link-alt',
                 name: 'externalUrls',
                 advice: 'No hay ningun enlace externo en esta pagina, planteate anadir alguno dentro del contexto'
             }
         } else {
             return {
                 status: 'warning',
+                icon: 'external-link-alt',
                 name: 'external URLs',
                 advice: 'Tienes ' + urlsNumber + ' enlaces externos.'
             }
@@ -21,6 +23,7 @@ const externalUrls = (textHtml = '') => {
     } else {
         return {
             status: 'danger',
+            icon: 'external-link-alt',
             name: 'externalUrls',
             advice: 'No hay ningun texto guardado en el editor.'
         }
@@ -32,12 +35,14 @@ const internalUrls = (textHtml = '') => {
         if (innerUrlsNumber === 0) {
             return {
                 status: 'danger',
+                icon: 'link',
                 name: 'internalUrls',
                 advice: 'No hay ningun enlace interno en esta pagina, planteate anadir algo relevante.'
             }
         } else {
             return {
                 status: 'warning',
+                icon: 'link',
                 name: 'internalUrls',
                 advice: 'Tienes ' + innerUrlsNumber + ' enlaces internos.'
             }
@@ -45,6 +50,7 @@ const internalUrls = (textHtml = '') => {
     } else {
         return {
             status: 'danger',
+            icon: 'link',
             name: 'internalUrls',
             advice: 'No hay ningun texto guardado en el editor.'
         }
@@ -57,12 +63,14 @@ const alt = (textHtml = '') => {
         if (altNumber === 0) {
             return {
                 status: 'danger',
+                icon: 'blind',
                 name: 'alt',
                 advice: 'A las imagenes de esta pagina les faltan los atributos alt.'
             }
         } else {
             return {
                 status: 'warning',
+                icon: 'blind',
                 name: 'internalUrls',
                 advice: 'Tienes ' + altNumber + ' Elementos Alt en tus imagenes.'
             }
@@ -70,6 +78,7 @@ const alt = (textHtml = '') => {
     } else {
         return {
             status: 'danger',
+            icon: 'blind',
             name: 'alt',
             advice: 'No hay ningun texto guardado en el editor.'
         }
@@ -82,12 +91,14 @@ const keywordInFirstBlock = (text = '') => {
         if (isThere) {
             return {
                 status: 'success',
+                icon: 'align-left',
                 name: 'keywordInFirstBlock',
                 advice: 'La palabra clave objetivo aparece en el primer  parrafo del escrito.'
             }
         } else {
             return {
                 status: 'danger',
+                icon: 'align-left',
                 name: 'keywordInFirstBlock',
                 advice: 'La palabra clave objetivo NO aparece en el primer parrafo del escrito. Planteate agregarla.'
             }
@@ -95,6 +106,7 @@ const keywordInFirstBlock = (text = '') => {
     } else {
         return {
             status: 'danger',
+            icon: 'align-left',
             name: 'keywordInFirstBlock',
             advice: 'No hay ningun texto guardado en el editor.'
         }
@@ -107,12 +119,14 @@ const keywordDensity = (text = '') => {
         if (density === 0) {
             return {
                 status: 'danger',
+                icon: 'chart-bar',
                 name: 'keywordDensity',
                 advice: 'No se hallo la palabra clave en el texto. Planteate agregarla.'
             }
         } else {
             return {
                 status: 'warning',
+                icon: 'chart-bar',
                 name: 'keywordDensity',
                 advice: 'La densidad de la palabra clave es de ' + density + '%, lo que esta  genial, la palabra clave objetivo se encontro ' + keywordNumber + ' veces.'
             }
@@ -121,6 +135,7 @@ const keywordDensity = (text = '') => {
     } else {
         return {
             status: 'danger',
+            icon: 'chart-bar',
             name: 'keywordDensity',
             advice: 'No hay ningun texto guardado en el editor.'
         }
@@ -134,22 +149,28 @@ const wordCount = (text) => {
             case (count === 0):
                 return {
                     status: 'danger',
+                    icon: 'list-ol',
                     name: 'wordCount',
                     advice: 'No se hallo texto. Planteate agregar algo en el editor y/o guardar.'
                 }
             case (count < 400):
-                return {
-
-                }
+            return {
+                status: 'warning',
+                icon: 'list-ol',
+                name: 'wordCount',
+                advice: 'El texto contiene ' + count + ' palabras. Es menor que el minimo recomendado de 400 palabras.'
+            }
             case (count >= 400):
                 return {
                     status: 'success',
+                    icon: 'list-ol',
                     name: 'wordCount',
                     advice: 'El texto contiene ' + count + ' palabras. Es mas o igual que el minimo recomendado de 400 palabras.'
                 }
             default:
                 return {
                     status: 'error',
+                    icon: 'list-ol',
                     name: 'wordCount',
                     advice: 'Ocurrio un error al verificar las palabras. Intenta de nuevo mas tarde.'
                 }
@@ -157,6 +178,7 @@ const wordCount = (text) => {
     } else {
         return {
             status: 'danger',
+            icon: 'list-ol',
             name: 'wordCount',
             advice: 'No hay ningun texto guardado en el editor.'
         }
@@ -175,6 +197,7 @@ export const getOne = (article, name) => {
         default:
             return {
                 status: 'danger',
+                icon: 'exclamation-triangle',
                 name,
                 advice: 'This name is not allowed. Please check your request for incorrect name.'
             }

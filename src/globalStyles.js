@@ -5,7 +5,8 @@ export const dayTheme = {
 	text: "black",
 	grey: 'rgb(185, 185, 185)',
   red: '#E04343',
-  nav: '#9954BB'
+  nav: '#9954BB',
+  primary: '#9954BB'
 };
 
 export const nightTheme = {

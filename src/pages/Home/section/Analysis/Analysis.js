@@ -1,6 +1,7 @@
 import React from 'react'
 import { default as AnalysisView } from './visual/Analysis'
 import { getAll } from './utils/getAdvices';
+
 const Analysis = ({ article }) => {
     const advices = getAll(article);
     const phrases = [
@@ -16,4 +17,4 @@ const Analysis = ({ article }) => {
     )
 }
 
-export default Analysis
+export default Analysis;
