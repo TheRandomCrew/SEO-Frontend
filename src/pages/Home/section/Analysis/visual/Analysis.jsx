@@ -33,13 +33,13 @@ const Analysis = ({ titleName = 'Analisis SEO', advices, styles = {}, phrases })
             color='error'
           />
           La palabra clave objetivo aparece en la URL de esta pagina.</p>
-        <Thing>
+        {/* <Thing>
         <BadgeIcon
             icon='search'
             color='error'
           />
           Hola
-        </Thing>
+        </Thing> */}
         <p>La palabra clave objetivo aparece solo en 2(de 3) subtitulos de  tu escrito.  Trata de usarla en al menos un subtitulo mas.</p>
       </div>
     </div>
@@ -56,17 +56,17 @@ const BadgeIcon = styled(FontAwesomeIcon)`
     (props.color === 'error' && 'purple')
   }
 `
-const Thing = styled.button`
-  color: blue;
+// const Thing = styled.button`
+//   color: blue;
 
-  ::before {
-    content: '🚀';
-  }
+//   ::before {
+//     content: '🚀';
+//   }
 
-  :hover {
-    color: red;
-  }
-`
+//   :hover {
+//     color: red;
+//   }
+// `
 
 const H2 = styled.h2`
     color: ${ props => props.theme.text};
