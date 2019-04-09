@@ -9,7 +9,8 @@ import {
     faAlignLeft,
     faListOl,
     faChartBar,
-    faExclamationTriangle 
+    faExclamationTriangle,
+    faLightbulb 
 } from '@fortawesome/free-solid-svg-icons';
 import Layout from './Layout';
 
@@ -21,6 +22,7 @@ library.add(faBlind);
 library.add(faListOl);
 library.add(faChartBar);
 library.add(faAlignLeft);
+library.add(faLightbulb);
 library.add(faExclamationTriangle);
 
 const Home = () => <Layout />

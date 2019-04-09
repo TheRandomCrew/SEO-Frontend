@@ -5,7 +5,7 @@ import PrivateRoute from './PrivateRoute';
 import { Login } from './Login';
 import { Home } from './Home';
 import { Signup } from './Register';
-import GlobalStore from './globalStore';
+import GlobalStore from '../store/globalStore';
 export const history = createBrowserHistory()
 
 function Routes() {

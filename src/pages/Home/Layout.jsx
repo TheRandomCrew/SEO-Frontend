@@ -6,6 +6,7 @@ import { NavBar, Search, Tables, Article, InfoButtons, Analysis, Footer } from '
 
 const Layout = () => {
     const [hideSEO, setHideSEO] = useState(false); // my first hook
+
     return (
         <>
             <NavBar />

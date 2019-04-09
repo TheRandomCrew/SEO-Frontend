@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom'
 import tokenService from '../token'
 import { history } from '../Routes'
 import LoginForm from './container/LoginForm';
-import globalContext from '../globalContext'
+import globalContext from '../../store/globalContext'
 
 const Login = () => {
     const { actions: { setUserID } } = React.useContext(globalContext);

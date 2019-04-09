@@ -1,7 +1,7 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { RowCenter } from './style/GridStyles';
-import { SERPTable } from './section/SERP';
+import SERPTable  from './SERP/SERPTable';
 import './style/ripple.css';
 
 const DnD = ({ items, droppableId, children = undefined }) => {
@@ -9,6 +9,7 @@ const DnD = ({ items, droppableId, children = undefined }) => {
     const getListStyle = isDraggingOver => ({
         background: isDraggingOver ? 'lightblue' : 'white',
     });
+    
     const getItemStyle = (isDragging, draggableStyle) => ({
         // some basic styles to make the items look a bit nicer
         userSelect: 'none',

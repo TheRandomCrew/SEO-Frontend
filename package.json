@@ -1,7 +1,7 @@
 {
   "name": "serp-keywords-tools",
-  "version": "3.11.0",
-  "author": "Israel-Laguan <https://github.com/Israel-Laguan>,Luis <https://github.com/luis-rp>",
+  "version": "3.12.0",
+  "author": "Israel-Laguan <https://github.com/Israel-Laguan>",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
